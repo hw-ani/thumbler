@@ -10,10 +10,22 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import knu.hackathon24.cat.thumbler.foods.Food;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
+import lombok.Getter;
 
 @Entity
 @Table(name = "RESERVATION")
+@Getter
 public class Reservation {
+  public Reservation() {
+  }
+
+  public Reservation(String reservationCode, Long reservationTime, UserMember userMember, Food food) {
+    this.reservationCode = reservationCode;
+    this.reservationTime = reservationTime;
+    this.userMember = userMember;
+    this.food = food;
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")

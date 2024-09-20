@@ -9,18 +9,21 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import knu.hackathon24.cat.thumbler.location.Location;
+import lombok.Getter;
 
 @Entity
 @Table(name = "STORE")
+@Getter
 public class Store {
   public Store() {
   }
 
-  public Store(String name, String address, String phone, String cert) {
+  public Store(String name, String address, String phone, String cert, Location location) {
     this.name = name;
     this.address = address;
     this.phone = phone;
     this.cert = cert;
+    this.location = location;
   }
 
   @Id

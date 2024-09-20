@@ -9,9 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import knu.hackathon24.cat.thumbler.store.Store;
+import lombok.Getter;
 
 @Entity
 @Table(name = "STORE_MEMBER")
+@Getter
 public class StoreMember {
   public StoreMember() {
   }
