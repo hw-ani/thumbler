@@ -9,9 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import knu.hackathon24.cat.thumbler.store.Store;
+import lombok.Getter;
 
 @Entity
 @Table(name = "FOOD")
+@Getter
 public class Food {
   public Food() {
   }
@@ -47,7 +49,7 @@ public class Food {
   @Column(name = "deadline", nullable = false)
   private Long deadline;
 
-  @Column(name = "image_url", nullable = false, length = 20)
+  @Column(name = "image_url", nullable = false, length = 100)
   private String imageUrl;
 
   @ManyToOne(optional = false)
