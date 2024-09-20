@@ -4,27 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소비자 회원가입 - 추가 정보</title>
+    <title>소비자 회원가입 - 계좌 정보</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        function showSuccessMessage() {
+            alert("회원가입에 성공했습니다!");
+            window.location.href = "seller_home.html"; // 로그인 후 첫 페이지로 이동
+        }
+    </script>
 </head>
 
 <body>
     <div class="form-container">
-
         <h1>thumb-ler</h1>
 
-
-        <form action="customer_signup3.html" method="POST">
-            <label for="nickname">닉네임</label>
+        <form onsubmit="event.preventDefault(); showSuccessMessage();">
+            <label for="nickname">상호명</label>
             <input type="text" id="nickname" name="nickname" required>
 
-            <label for="username">아이디</label>
+            <label for="username">주소</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="password">비밀번호</label>
+            <label for="password">사업장 연락처</label>
             <input type="password" id="password" name="password" required>
 
-            <label for="password-confirm">비밀번호 확인</label>
+            <label for="password-confirm">사업자 확인 번호(10자리)</label>
             <input type="password" id="password-confirm" name="password-confirm" required>
 
             <button type="submit" class="next-button">next &gt;</button>

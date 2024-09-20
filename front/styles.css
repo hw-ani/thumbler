@@ -56,6 +56,7 @@ input {
 
 .next-button:hover {
     background-color: #3B5C5C;
+
 }
 
 .radio-buttons {
@@ -71,4 +72,5 @@ input {
 
 input[type="radio"] {
     margin-right: 0.5rem;
+
 }
