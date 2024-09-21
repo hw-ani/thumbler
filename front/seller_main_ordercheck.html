@@ -102,37 +102,50 @@
         <h1>주문 조회</h1> <!-- 주문 조회 타이틀 영역 -->
         <div class="order-list">
             <!-- 서버에서 주문 데이터를 받아오는 영역 -->
-            <div class="order">
-                <p><strong>사용자 닉네임님</strong></p>
-                <p>○○상품 주문번호 : 888888888888</p>
-                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
-            </div>
-            <div class="order">
-                <p><strong>사용자 닉네임님</strong></p>
-                <p>○○상품 주문번호 : 888888888888</p>
-                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
-            </div>
-            <div class="order">
-                <p><strong>사용자 닉네임님</strong></p>
-                <p>○○상품 주문번호 : 888888888888</p>
-                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
-            </div>
-            <div class="order">
-                <p><strong>사용자 닉네임님</strong></p>
-                <p>○○상품 주문번호 : 888888888888</p>
-                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
-            </div>
-            <div class="order">
-                <p><strong>사용자 닉네임님</strong></p>
-                <p>○○상품 주문번호 : 888888888888</p>
-                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
-            </div>
-            <div class="order">
-                <p><strong>사용자 닉네임님</strong></p>
-                <p>○○상품 주문번호 : 888888888888</p>
-                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
-            </div>
+            
         </div>
     </div>
 </body>
+
+<script>
+    let orderList;
+    fetch('http://43.200.62.183:8080/reservation/store', {
+        method: 'GET'
+    })
+    .then(response => {
+        console.log(response);
+        return response.json();
+    })
+    .then(data => {
+        orderList = data;
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert('오류가 발생했습니다.');
+    });
+
+    const orderListDiv = document.getElementById('order-list');
+        
+    // 기존의 리스트 초기화
+    orderListDiv.innerHTML = '';
+
+    // 주문 데이터를 순회하면서 각 주문 항목을 동적으로 생성
+    orderList.forEach(order => {
+        const orderDiv = document.createElement('div');
+        orderDiv.classList.add('order');
+        
+        // 주문 정보를 HTML로 동적으로 생성
+        orderDiv.innerHTML = `
+            <p><strong>${order.userMember.nickname}님</strong></p>
+            <p>${order.food.name} 주문번호 : ${order.reservationCode}</p>
+            <p>${order.reservationTime} 도착 예정</p>
+        `;
+
+        // 생성한 주문 항목을 order-list에 추가
+        orderListDiv.appendChild(orderDiv);
+    });
+
+</script>
+
 </html>
