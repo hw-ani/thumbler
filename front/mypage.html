@@ -7,36 +7,91 @@
     <title>thumb-ler - My Page</title>
     <link rel="stylesheet" href="mypage_styles.css">
     <style>
+        /* 기본 스타일 */
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
 
-        .menu-bar {
+        header {
+            background-color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background-color: #004d40;
-            color: white;
+            color: #255852;
+            border-bottom: 2px solid #255852;
+            flex-shrink: 0;
         }
 
-        .menu-bar h1 {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .thumb-ler-logo {
+        header a.logo {
+            text-decoration: none;
+            color: #255852;
             font-size: 24px;
             font-weight: bold;
-            color: white;
-            text-decoration: none;
+        }
+
+        .menu-icon {
+            font-size: 30px;
             cursor: pointer;
         }
 
-        /* 프로필 섹션 */
+        .top-bar {
+            background-color: #255852;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            flex-shrink: 0;
+        }
+
+        .top-bar img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .side-menu {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            background-color: #255852;
+            color: white;
+            z-index: 1;
+            transition: 0.3s ease;
+            padding-top: 60px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            border-bottom: 1px solid white;
+        }
+
+        .side-menu a:hover {
+            background-color: #457d68;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            cursor: pointer;
+        }
+
         .profile-section {
             display: flex;
             align-items: center;
@@ -69,7 +124,6 @@
             margin-top: 5px;
         }
 
-        /* 이미지 박스 */
         .image-box {
             background-color: white;
             border: 2px solid #004d40;
@@ -90,19 +144,20 @@
             border-radius: 10px;
         }
 
-        /* 포인트 섹션 */
         .points-section {
             text-align: center;
             font-size: 20px;
-            margin: 10px 0;
+            margin: 10px 0 5px;
+            /* 포인트 섹션과 버튼 사이의 간격을 좁힘 */
             font-weight: bold;
         }
 
-        /* 버튼 섹션 */
         .button-section {
             display: flex;
             justify-content: space-around;
-            margin: 20px;
+            margin: 5px 20px;
+            /* 버튼과 포인트 섹션 사이 간격 조정 */
+            flex-wrap: wrap;
         }
 
         .button-section button {
@@ -112,10 +167,11 @@
             border: none;
             border-radius: 10px;
             font-size: 12px;
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             text-align: center;
             cursor: pointer;
+            margin: 10px;
         }
 
         .button-section button:hover {
@@ -154,17 +210,42 @@
         }
     </style>
     <script>
-        function goToCustomerHome() {
+        function goToMainPage() {
             window.location.href = "customer_home.html";
+        }
+
+        function toggleMenu() {
+            var sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+
+        function showContact() {
+            alert("thumblerfor@gmail.com 이메일로 연락 주세요");
         }
     </script>
 </head>
 
 <body>
     <!-- 상단 메뉴 바 -->
-    <div class="menu-bar">
-        <a href="customer_home.html" class="thumb-ler-logo">thumb-ler</a> <!-- 좌측 상단 thumb-ler 로고 클릭 시 이동 -->
-        <button onclick="goToCustomerHome()">&#9776;</button>
+    <header>
+        <a href="#" class="logo" onclick="goToMainPage()">thumb-ler</a>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    </header>
+
+    <!-- 사이드 메뉴 -->
+    <div id="sideMenu" class="side-menu">
+        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <h2>내 프로필</h2>
+        </div>
+
+        <a href="mypage.html">My page 이동하기</a>
+        <a href="setting.html">설정</a>
+        <a href="#" onclick="showContact()">문의하기</a>
+        <a href="index.html">로그아웃</a>
     </div>
 
     <!-- 프로필 섹션 -->
