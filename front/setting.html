@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings</title>
+    <link rel="stylesheet" href="set_styles.css">
+    <style>
+        /* 추가된 홈 버튼 스타일 */
+        .home-icon {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function goToHome() {
+            window.location.href = "customer_home.html"; // 홈 버튼 클릭 시 이동
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 우측 상단 홈 버튼 -->
+    <div class="home-icon" onclick="goToHome()">&#8962;</div> <!-- &#8962;는 집 모양 아이콘 -->
+
+    <main>
+        <section class="settings-section">
+            <div class="section-header">설정</div>
+
+            <div class="settings-category">
+                <div class="category-title">account</div>
+                <ul class="settings-list">
+                    <li>프로필 수정</li>
+                    <li>비밀번호 변경</li>
+                    <li>출금 계좌 관리</li>
+                </ul>
+            </div>
+
+            <div class="settings-category">
+                <div class="category-title">service</div>
+                <ul class="settings-list">
+                    <li>공지사항</li>
+                    <li>스토어 입점 문의</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -57,3 +57,25 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* 기본 스타일 */
+body {
+    font-size: 16px;
+    background-color: lightgray;
+}
+
+/* 작은 화면 (모바일)일 때 */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        background-color: lightblue;
+    }
+}
+
+/* 더 작은 화면 (작은 모바일)일 때 */
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+        background-color: lightgreen;
+    }
+}

@@ -56,4 +56,21 @@ input {
 
 .next-button:hover {
     background-color: #3B5C5C;
+
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.radio-buttons label {
+    font-size: 1rem;
+    color: #2F4F4F;
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+
 }
