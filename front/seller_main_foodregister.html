@@ -1,0 +1,214 @@
+<!DOCTYPE html><!--등록되었습니다 뜨게, 사파리에서 이미지 삽입 안됨, 텀블러 로고랑 식사 이모지 배치 구분-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 등록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #255852; /* 상단 바 전체 배경색을 통일 */
+            border-bottom: 2px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .header-bar img {
+            width: 30px;
+            height: 30px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #255852;
+            padding: 10px;
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .content img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%; /* 이미지가 부모 요소 크기에 맞춰 자동으로 크기 조정됨 */
+            height: auto; /* 이미지의 비율이 유지되도록 설정 */
+            border: 1px solid #255852; /* 얇은 테두리 */
+            border-radius: 8px;
+            cursor: pointer; /* 이미지 틀을 클릭 가능하게 변경 */
+        }
+
+        .info {
+            margin-bottom: 10px;
+        }
+
+        .info label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box; /* 입력 필드 및 텍스트 영역 일관성 유지 */
+            resize: none;
+        }
+
+        textarea {
+            height: 80px; /* 텍스트 영역 높이 설정 */
+        }
+
+        .register-btn {
+            background-color: #255852;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            width: 100px;
+            text-align: center;
+        }
+
+        .register-btn:hover {
+            background-color: #1e4842;
+        }
+
+        /* 숨겨진 파일 업로드 input */
+        .hidden-input {
+            display: none;
+        }
+
+        /* 반응형 디자인 */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+                max-width: 100%; /* 모바일 화면에 맞게 넓이 조정 */
+            }
+
+            header .logo {
+                font-size: 18px;
+            }
+
+            .content img {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            textarea {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="main.html" class="logo">thumb-ler</a>
+            <img src="icon.png" alt="Icon"> <!-- img로 이모지 파일을 삽입할 수 있는 부분 -->
+        </header>
+        <div class="content">
+            <!-- 이미지 클릭 시 파일 첨부 창이 열림 -->
+            <img src="placeholder.png" alt="상품 이미지" id="product-image" onclick="document.getElementById('file-input').click();">
+            <!-- 파일 첨부 input, 숨겨져 있음 -->
+            <input type="file" id="file-input" class="hidden-input" accept="image/*" onchange="loadImage(event)">
+            <form id="product-form">
+                <div class="info">
+                    <label for="deadline">마감시간</label>
+                    <input type="datetime-local" id="deadline" name="deadline" required>
+
+                    <label for="product-name">상품명</label>
+                    <input type="text" id="product-name" name="product-name" required>
+
+                    <label for="original-price">원래가격</label>
+                    <input type="number" id="original-price" name="original-price" required>
+
+                    <label for="discounted-price">할인된 가격</label>
+                    <input type="number" id="discounted-price" name="discounted-price" required>
+
+                    <label for="quantity">개수</label>
+                    <input type="number" id="quantity" name="quantity" required>
+                </div>
+
+                <label for="description">상품 설명</label>
+                <textarea id="description" name="description" placeholder="상품 설명" required></textarea>
+
+                <button type="submit" class="register-btn">등록</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 파일 업로드 시 선택한 이미지를 표시하는 함수
+        function loadImage(event) {
+            const image = document.getElementById('product-image');
+            image.src = URL.createObjectURL(event.target.files[0]); // 업로드한 파일을 이미지로 표시
+            image.onload = function() {
+                URL.revokeObjectURL(image.src); // 메모리 해제
+            }
+        }
+
+        // 폼 제출 시 데이터를 서버로 보내는 함수
+        document.getElementById('product-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            const formData = new FormData(this);
+
+            fetch('/upload', {  // 서버 URL에 맞게 수정 필요
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("등록이 완료 되었습니다."); // 성공 메시지
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>

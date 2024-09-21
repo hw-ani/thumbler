@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업자 메인화면</title> <!--상단바 메뉴 슬라이드, 탈퇴 이런 거 받아야 하지 않나 일단 pass, point 자리에 뭘 넣을지 고민, 버튼 누르면 페이지 이동-->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background-color: #f0f0f0;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .logo {
+            color: #255852;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .menu-icon {
+            color: #255852;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        .welcome-box {
+            background-color: #e6fffa;
+            color: #255852;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .grid-button {
+            background-color: #255852;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            aspect-ratio: 1 / 1; /* 정사각형 유지 */
+        }
+        .grid-button:hover {
+            background-color: #1e4640;
+        }
+        .icon-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            color: #255852;
+            border-top: 1px solid #e6e6e6;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #255852;
+            padding: 20px;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .sidebar-close {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: block;
+            text-align: right;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* 반응형 스타일 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .logo {
+                font-size: 28px;
+            }
+            .welcome-box {
+                font-size: 16px;
+                padding: 15px;
+            }
+            .grid-button {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .welcome-box {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .grid-button {
+                font-size: 14px;
+            }
+            .menu-icon {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">thumb-ler</div>
+            <div class="menu-icon" id="menu-icon">☰</div>
+        </div>
+        <div class="welcome-box">
+            🏪 ooo 사업자님! 안녕하세요! 🍃
+        </div>
+        <div class="button-grid">
+            <button class="grid-button" onclick="location.href='seller_main_ordercheck.html'">주문조회</button>
+            <button class="grid-button" onclick="location.href='seller_main_qr_scan.html'">QR인식</button>
+            <button class="grid-button" onclick="location.href='seller_main_foodregister.html'">제품등록</button>
+            <button class="grid-button" onclick="location.href='points.html'">포인트</button>
+        </div>        
+        <div class="icon-row">
+            <span>🏃</span>
+            <span>🌳🌳🌳</span>
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <span class="sidebar-close" id="sidebar-close">✖</span>
+        <ul>
+            <li><a href="#">메뉴1</a></li>
+            <li><a href="#">메뉴2</a></li>
+            <li><a href="#">메뉴3</a></li>
+            <li><a href="#">메뉴4</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // 이벤트 리스너 추가
+        document.getElementById("menu-icon").addEventListener("click", toggleSidebar);
+        document.getElementById("menu-icon").addEventListener("touchstart", toggleSidebar);
+        document.getElementById("sidebar-close").addEventListener("click", toggleSidebar);
+        document.getElementById("sidebar-close").addEventListener("touchstart", toggleSidebar);
+
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("open");
+        }
+    </script>
+</body>
+</html>
