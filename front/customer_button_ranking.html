@@ -57,10 +57,8 @@
             background-color: white;
             margin: 10px;
             border: 3px solid #004d40;
-            /* 구분선 두께와 색상 조정 */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* 구분선을 더 돋보이게 */
         }
 
         .profile-picture {
@@ -91,14 +89,11 @@
         .content-box {
             flex-grow: 1;
             border: 3px solid #004d40;
-            /* 랭킹 섹션 구분선 */
             margin: 10px;
             background-color: white;
             overflow-y: scroll;
             border-radius: 10px;
-            /* 테두리 둥글게 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* 구분선을 더 돋보이게 */
         }
 
         .ranking-list {
@@ -134,7 +129,6 @@
             align-items: center;
             justify-content: center;
             height: 60px;
-            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
 
         .bottom-nav img {
@@ -303,43 +297,35 @@
             alert("thumblerfor@gmail.com 이메일로 연락 주세요");
         }
 
-        // Example backend data fetching simulation
-        document.addEventListener('DOMContentLoaded', function () {
-            // Simulate data fetching from the backend for profile
-            let userProfile = {
-                nickname: "홍길동",
-                ranking: "3등",
-                profilePicture: "profile.jpg" // URL to the profile picture
-            };
+        // Fetch ranking data from the API
+        async function fetchRanking() {
+            try {
+                const response = await fetch('http://43.200.62.183:8080/member/ranking10', {
+                    method: 'GET'
+                });
 
-            // Populate the HTML elements with backend data
-            document.getElementById('nickname').textContent = userProfile.nickname;
-            document.getElementById('ranking').textContent = `현재 ${userProfile.nickname}님은 ${userProfile.ranking}이에요!`;
-            document.getElementById('profilePic').style.backgroundImage = `url(${userProfile.profilePicture})`;
+                if (!response.ok) {
+                    throw new Error('랭킹 데이터를 불러오지 못했습니다.');
+                }
 
-            // Simulate ranking data
-            let rankings = [
-                "1위: 홍길동",
-                "2위: 이순신",
-                "3위: 세종대왕",
-                "4위: 강감찬",
-                "5위: 유관순",
-                "6위: 장보고",
-                "7위: 김구",
-                "8위: 윤봉길",
-                "9위: 신사임당",
-                "10위: 안중근"
-            ];
+                const rankingData = await response.json();
+                const rankingList = document.getElementById('rankingList');
+                rankingList.innerHTML = ''; // Clear the list before appending new data
 
-            let rankingList = document.getElementById('rankingList');
-            rankings.forEach(function (rank) {
-                let li = document.createElement('li');
-                li.textContent = rank;
-                rankingList.appendChild(li);
-            });
-        });
+                for (const [key, value] of Object.entries(rankingData.ranking)) {
+                    let li = document.createElement('li');
+                    li.textContent = `${key}: ${value}`;
+                    rankingList.appendChild(li);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // Call fetchRanking function when the page loads
+        document.addEventListener('DOMContentLoaded', fetchRanking);
     </script>
 
 </body>
 
-</html>ㅎ
+</html>
