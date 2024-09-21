@@ -1,6 +1,7 @@
 package knu.hackathon24.cat.thumbler.location;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,7 +18,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class LocationService {
 
-    private static final String KAKAO_REST_API_KEY = "9d7e6c5ac081616b470106c706568f5b"; // 여기에 API 키를 넣으세요
+    @Value("${KAKAO_KEY}")
+    private String KAKAO_REST_API_KEY; // 여기에 API 키를 넣으세요
     private static final String KAKAO_ADDRESS_URL = "https://dapi.kakao.com/v2/local/search/address.json";
 
     public Location getLocationFromAddress(String address) {

@@ -10,10 +10,12 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import knu.hackathon24.cat.thumbler.location.Location;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "STORE")
 @Getter
+@Setter
 public class Store {
   public Store() {
   }
