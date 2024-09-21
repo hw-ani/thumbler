@@ -10,6 +10,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "RANKING")
@@ -32,6 +33,7 @@ public class Ranking {
   @JoinColumn(name = "user_member", nullable = false)
   private UserMember userMember;
 
+  @Setter
   @Column(name = "count", nullable = false)
   private Long count;
 }

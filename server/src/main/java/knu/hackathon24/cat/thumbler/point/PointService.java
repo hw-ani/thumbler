@@ -49,8 +49,8 @@ public class PointService {
         UserMember user = session.getUserMemberBySessionId(sessionId);
         // 포인트 히스토리 조회 로직 구현
         List<PointHistoryDto> history = new ArrayList<>();
-        // 예시 데이터 추가
-        history.add(new PointHistoryDto(1726560348L, 3000L, "포인트 출금"));
+//        // 예시 데이터 추가
+//        history.add(new PointHistoryDto(1726560348L, 3000L, "포인트 출금"));
         return new PointHistoryResponseDto(history);
     }
 

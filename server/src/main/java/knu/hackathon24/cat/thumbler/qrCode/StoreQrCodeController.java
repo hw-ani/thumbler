@@ -1,6 +1,8 @@
 package knu.hackathon24.cat.thumbler.qrCode;
 
 import jakarta.servlet.http.Cookie;
+import knu.hackathon24.cat.thumbler.ranking.Ranking;
+import knu.hackathon24.cat.thumbler.ranking.RankingRepository;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
 import knu.hackathon24.cat.thumbler.userMember.UserMemberRepository;
 import lombok.Data;
@@ -34,6 +36,9 @@ public class StoreQrCodeController {
     @Autowired
     private UserMemberRepository userMemberRepository;
 
+    @Autowired
+    private RankingRepository rankingRepository;
+
     @PostMapping("/qrcode/stores/scan")
     public ResponseEntity<Map<String, Long>> scanQrCode(@RequestBody ScanRequest request, HttpServletRequest httpRequest) {
         String sessionId = extractSessionId(httpRequest);
@@ -44,7 +49,7 @@ public class StoreQrCodeController {
         }
 
         // QR 코드에서 사용자 ID와 포인트 정보 추출
-        String userId = extractUserIdFromQrCodeUrl(request.getQrCodeUrl());
+        String userId = request.getUserId();
         Long points = request.getPoints(); // 스캔 시 항상 500 포인트로 설정
 
         // 사용자에게 포인트 적립 로직
@@ -53,6 +58,18 @@ public class StoreQrCodeController {
             Point point = user.getPoint(); // UserMember에 Point 객체가 연결되어 있다고 가정
             point.setRemains(point.getRemains() + points); // 포인트 적립
             pointRepository.save(point); // 포인트 저장
+
+            // 랭킹 카운트 업데이트
+            Ranking ranking = rankingRepository.findByUserMember(user); // 사용자에 해당하는 랭킹 찾기
+            if (ranking != null) {
+                ranking.setCount(ranking.getCount() + 1); // 카운트 증가
+                rankingRepository.save(ranking); // 랭킹 저장
+            } else {
+                // 사용자가 랭킹에 없다면 새 랭킹 생성
+                ranking = new Ranking(user, 1L); // 카운트 1로 초기화
+                rankingRepository.save(ranking);
+            }
+
             Map<String, Long> response = new HashMap<>();
             response.put("point", point.getRemains());
             return ResponseEntity.ok(response);
@@ -99,5 +116,6 @@ public class StoreQrCodeController {
 class ScanRequest {
     private String storeId;
     private String qrCodeUrl;
+    private String userId;
     private Long points;
 }

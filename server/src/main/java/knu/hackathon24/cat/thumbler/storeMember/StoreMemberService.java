@@ -72,7 +72,7 @@ public class StoreMemberService {
             String sessionId = issueStoreSessionId(storeMember);
 
             // 쿠키에 세션 ID 추가
-            Cookie cookie = new Cookie("SESSIONID", sessionId);
+            Cookie cookie = new Cookie("sessionId", sessionId);
             cookie.setHttpOnly(true); // JavaScript에서 접근하지 못하게 설정
             cookie.setPath("/"); // 쿠키의 유효 범위를 설정 (기본적으로 모든 경로에서 유효)
             response.addCookie(cookie); // 응답에 쿠키 추가
