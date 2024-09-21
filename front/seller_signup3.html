@@ -4,70 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소비자 회원가입 - 계좌 정보</title>
+    <title>사업자 회원가입 - 계좌 정보</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        function submitForm(event) {
-            event.preventDefault(); // 기본 폼 제출 방지
-
-            // 입력 데이터 수집
-            const storeName = document.getElementById("nickname").value;
-            const address = document.getElementById("username").value;
-            const storePhone = document.getElementById("password").value;
-            const cert = document.getElementById("password-confirm").value;
-
-            // 요청 데이터 객체 생성
-            const requestBody = {
-                store: {
-                    name: storeName,
-                    address: address,
-                    phone: storePhone,
-                    cert: cert
-                }
-            };
-
-            // API 요청 보내기
-            fetch('/member/owner/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    alert("회원가입에 성공했습니다!");
-                    window.location.href = "seller_main1.html"; // 성공 후 페이지 이동
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert('등록 중 오류가 발생했습니다.');
-                });
-        }
-    </script>
 </head>
 
 <body>
     <div class="form-container">
         <h1>thumb-ler</h1>
 
-        <form id="registerForm" onsubmit="submitForm(event)">
-            <label for="nickname">상호명</label>
-            <input type="text" id="nickname" name="nickname" required>
+        <form id="registerForm">
+            <label for="storeName">상호명</label>
+            <input type="text" id="storeName" name="storeName" required>
 
-            <label for="username">주소</label>
-            <input type="text" id="username" name="username" required>
+            <label for="storeAddress">주소</label>
+            <input type="text" id="storeAddress" name="storeAddress" required>
 
-            <label for="password">사업장 연락처</label>
-            <input type="text" id="password" name="password" required>
+            <label for="storePhone">사업장 연락처</label>
+            <input type="text" id="storePhone" name="storePhone" required>
 
-            <label for="password-confirm">사업자 확인 번호(10자리)</label>
-            <input type="text" id="password-confirm" name="password-confirm" required>
+            <label for="storeCert">사업자 확인 번호(10자리)</label>
+            <input type="text" id="storeCert" name="storeCert" required>
 
-            <button type="submit" class="next-button">next &gt;</button>
+            <button type="button" class="next-button">next &gt;</button>
         </form>
     </div>
 </body>
+
+<script>
+    document.getElementById('registerForm').addEventListener('click', function event() {
+        const userId = localStorage.getItem('userId');
+        const password = localStorage.getItem('password');
+        const ownerName = localStorage.getItem('ownerName');
+        const ownerPhone = localStorage.getItem('ownerPhone');
+        const storeName = document.getElementById("storeName").value;
+        const storeAddress = document.getElementById("storeAddress").value;
+        const storePhone = document.getElementById("storePhone").value;
+        const storeCert = document.getElementById("storeCert").value;
+        
+        // API 요청 보내기
+        fetch('http://43.200.62.183:8080/member/owner/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ownerName,
+                ownerPhone,
+                ownerEmail: "default@email.com",
+                userId,
+                password,
+                store: {
+                    name: storeName,
+                    address: storeAddress,
+                    phone: storePhone,
+                    cert: storeCert
+                }
+            })
+        })
+            .then(response => {
+                console.log(response);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                alert("회원가입에 성공했습니다!");
+                window.location.href = "seller_main1.html"; // 성공 후 페이지 이동
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('등록 중 오류가 발생했습니다.');
+            });
+    });
+</script>
 
 </html>

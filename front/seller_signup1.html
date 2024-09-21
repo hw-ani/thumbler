@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소비자 회원가입</title>
+    <title>사업자 회원가입</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="form-container">
         <h1>thumb-ler</h1>
-        <form id="registerForm">
+        <form id="registerForm" action="seller_signup2.html" method="GET">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required>
 
@@ -24,33 +24,13 @@
 
     <script>
         document.getElementById('registerForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // 폼의 기본 제출 기능 방지
+            // event.preventDefault(); // 폼의 기본 제출 기능 방지
 
             const ownerName = document.getElementById('name').value;
             const ownerPhone = document.getElementById('contact').value;
 
-            const requestBody = {
-                ownerName: ownerName,
-                ownerPhone: ownerPhone
-            };
-
-            fetch('/member/owner/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    // 다음 페이지로 이동
-                    window.location.href = 'seller_signup2.html';
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert('등록 중 오류가 발생했습니다.');
-                });
+            localStorage.setItem('ownerName', ownerName);
+            localStorage.setItem('ownerPhone', ownerPhone);
         });
     </script>
 </body>

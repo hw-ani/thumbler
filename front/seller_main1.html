@@ -171,7 +171,7 @@
             <button class="logout-button" onclick="location.href='index.html'">로그아웃</button>
         </div>
         <div class="welcome-box">
-            🏪 ooo 사업자님! 안녕하세요! 🍃
+            🏪 사업자님! 안녕하세요! 🍃
         </div>
         <div class="button-grid">
             <button class="grid-button" onclick="location.href='seller_main_ordercheck.html'">주문조회</button>
@@ -185,25 +185,13 @@
         </div>
     </div>
 
-    <div class="sidebar" id="sidebar">
-        <span class="sidebar-close" id="sidebar-close">✖</span>
-        <ul>
-            <li><a href="#">메뉴1</a></li>
-            <li><a href="#">메뉴2</a></li>
-            <li><a href="#">메뉴3</a></li>
-            <li><a href="#">메뉴4</a></li>
-        </ul>
-    </div>
+    
 
     <script>
         // 이벤트 리스너 추가
         document.getElementById("sidebar-close").addEventListener("click", toggleSidebar);
         document.getElementById("sidebar-close").addEventListener("touchstart", toggleSidebar);
 
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("open");
-        }
     </script>
 </body>
 </html>
