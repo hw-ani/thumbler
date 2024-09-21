@@ -55,4 +55,8 @@ public class Food {
   @ManyToOne(optional = false)
   @JoinColumn(name = "store", nullable = false)
   private Store store;
+
+  public void setAmount(Long newAmount) {
+    this.amount = newAmount;
+  }
 }
