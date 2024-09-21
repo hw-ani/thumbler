@@ -5,12 +5,16 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import knu.hackathon24.cat.thumbler.interceptor.AuthCheckInterceptor;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 public class InterceptorConfig implements WebMvcConfigurer{
+    final private AuthCheckInterceptor authCheckInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthCheckInterceptor())
+        registry.addInterceptor(authCheckInterceptor)
         .order(1)
         .addPathPatterns("/**")
         .excludePathPatterns("/store/near", "/member/*/register", "/member/login")

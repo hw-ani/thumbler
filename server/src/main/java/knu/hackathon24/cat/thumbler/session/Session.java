@@ -3,40 +3,33 @@ package knu.hackathon24.cat.thumbler.session;
 import java.util.HashMap;
 import java.util.UUID;
 
-import knu.hackathon24.cat.thumbler.location.Location;
-import knu.hackathon24.cat.thumbler.point.Point;
-import knu.hackathon24.cat.thumbler.store.Store;
 import knu.hackathon24.cat.thumbler.storeMember.StoreMember;
+import knu.hackathon24.cat.thumbler.storeMember.StoreMemberRepository;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
+import knu.hackathon24.cat.thumbler.userMember.UserMemberRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class Session {
-  private static Session singletonSession = null;
+  final private UserMemberRepository userMemberRepository;
+  final private StoreMemberRepository storeMemberRepository;
 
-  private Session() {
-    userSessionStorage = new HashMap<String, UserMember>();
-    storeSessionStorage = new HashMap<String, StoreMember>();
+  private HashMap<String, UserMember> userSessionStorage = new HashMap<String, UserMember>();
+  private HashMap<String, StoreMember> storeSessionStorage = new HashMap<String, StoreMember>();
 
+  public void initForTest() {
     // 테스트를 위해 기본 계정 및 관련 영구 세션 생성
-    Point point1 = new Point();
-    UserMember testUserMember = new UserMember("hwan", "010-1234-5678", "hwani", "jh1", "hwan", "kakao", "3333", point1);
+    UserMember testUserMember = userMemberRepository.findById(1L).get();
     this.userSessionStorage.put("testUserSessionId", testUserMember);
 
-    Location location = new Location("15.123", "123.32");
-    Store store = new Store("경북식당", "대구광역시 북구 200번지", "010-1234-5678", "1234567890", location);
-    StoreMember testStoreMember = new StoreMember("차차차", "010-1234-5678", "first@gmail.com", "cha", "chacha", store);
+    StoreMember testStoreMember = storeMemberRepository.findById(1L).get();
     this.storeSessionStorage.put("testStoreSessionId", testStoreMember);
   }
-
-  public static Session getInstance() {
-    if (singletonSession == null)
-      singletonSession = new Session();
-    return singletonSession;
-  }
-
-  private HashMap<String, UserMember> userSessionStorage;
-  private HashMap<String, StoreMember> storeSessionStorage;
 
   public String issueUserSessionId(UserMember userMember) {
     String newSessionId = generateSessionId();
@@ -63,11 +56,13 @@ public class Session {
   }
 
   public UserMember getUserMemberBySessionId(String sessionId) {
-    return userSessionStorage.get(sessionId);
+    UserMember userMemberTemp = userSessionStorage.get(sessionId);
+    return userMemberRepository.findById(userMemberTemp.getId()).get();
   }
 
   public StoreMember getStoreMemberBySessionId(String sessionId) {
-    return storeSessionStorage.get(sessionId);
+    StoreMember storeMemberTemp = storeSessionStorage.get(sessionId);
+    return storeMemberRepository.findById(storeMemberTemp.getId()).get();
   }
 
   private String generateSessionId() {
