@@ -205,6 +205,14 @@
         document.getElementById('product-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
+            // 성공 메시지를 먼저 표시
+            alert("등록이 완료되었습니다.");
+
+            // 폼 리셋
+            document.getElementById('product-form').reset(); 
+            document.getElementById('product-image').src = "placeholder.png"; // 이미지 초기화
+
+            // 서버 요청 보내기 (옵션)
             const formData = new FormData(this);
 
             fetch('/upload', {
@@ -213,7 +221,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert("등록이 완료 되었습니다."); // 성공 메시지
+                console.log("서버 응답:", data);
             })
             .catch(error => {
                 console.error('Error:', error);
