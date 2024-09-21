@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "QRCODE")
 @Getter
@@ -24,7 +26,7 @@ public class QrCode {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "qr_image_url", nullable = false, length = 20)
+  @Column(name = "qr_image_url", nullable = false, length = 200)
   private String qrImageUrl;
 
   /********** interface **********/
