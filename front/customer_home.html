@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--나무 그림-->
 <html lang="ko">
 
 <head>
@@ -96,17 +96,23 @@
 
         /* 프로필 섹션 */
         .profile-section {
-            text-align: center;
-            border-bottom: 1px solid white;
-            padding-bottom: 10px;
+        text-align: center;
+        margin-bottom: 0;
+        border-bottom: 1px solid white;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         }
 
         .profile-section img {
             width: 80px;
             height: 80px;
-            border-radius: 50%;
+            border-radius: 50%; /* 원형으로 유지 */
             background-color: white;
-            padding: 10px;
+            display: block; /* 인라인 요소가 되지 않도록 설정 */
+            object-fit: cover; 
         }
 
         .profile-section h2 {
@@ -182,7 +188,7 @@
 
         <!-- 프로필 섹션 -->
         <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <img src="user.png" alt="프로필 이미지">
             <h2>내 프로필</h2>
         </div>
 

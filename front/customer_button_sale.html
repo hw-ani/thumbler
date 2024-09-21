@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--완-->
 <html lang="ko">
 
 <head>
@@ -48,13 +48,14 @@
             padding: 10px;
             font-size: 18px;
             flex-shrink: 0;
-            background-image: url('sale.png');
-            /* sale.png 이미지 추가 */
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            /* 이미지 위치 조정 */
-            background-size: 30px 30px;
-            /* 이미지 크기 조정 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sale-bar img {
+            width: 40px;
+            height: 40px;
         }
 
         /* 지역 선택 그리드 */
@@ -64,7 +65,9 @@
             gap: 15px;
             margin: 40px 20px;
             flex-grow: 1;
+            margin-bottom: 80px; /* 하단 네비게이션과의 간격을 확보 */
         }
+
 
         .region-grid button {
             background-color: white;
@@ -158,18 +161,23 @@
 
         /* 프로필 섹션 */
         .profile-section {
-            text-align: center;
-            margin-bottom: 0;
-            border-bottom: 1px solid white;
-            padding-bottom: 10px;
+        text-align: center;
+        margin-bottom: 0;
+        border-bottom: 1px solid white;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         }
 
         .profile-section img {
             width: 80px;
             height: 80px;
-            border-radius: 50%;
+            border-radius: 50%; /* 원형으로 유지 */
             background-color: white;
-            padding: 10px;
+            display: block; /* 인라인 요소가 되지 않도록 설정 */
+            object-fit: cover; 
         }
 
         .profile-section h2 {
@@ -186,9 +194,9 @@
         <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
     </header>
 
-    <!-- 초록색 바 (마감세일) -->
+    <!-- 초록색 바 (마감세일 이미지) -->
     <div class="sale-bar">
-
+        <img src="sale.png" alt="마감세일">
     </div>
 
     <!-- 지역 선택 그리드 -->
@@ -233,7 +241,7 @@
 
         <!-- 프로필 섹션 -->
         <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <img src="user.png" alt="프로필 이미지">
             <h2>내 프로필</h2>
         </div>
 

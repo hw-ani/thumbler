@@ -96,23 +96,24 @@
             cursor: pointer;
         }
 
-        /* 프로필 섹션 */
         .profile-section {
-            text-align: center;
-            margin-bottom: 0;
-            /* 하단 마진 제거 */
-            border-bottom: 1px solid white;
-            /* 프로필과 My Page 구분 */
-            padding-bottom: 10px;
-            /* 다른 메뉴들과 동일한 간격 */
+        text-align: center;
+        margin-bottom: 0;
+        border-bottom: 1px solid white;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         }
 
         .profile-section img {
             width: 80px;
             height: 80px;
-            border-radius: 50%;
+            border-radius: 50%; /* 원형으로 유지 */
             background-color: white;
-            padding: 10px;
+            display: block; /* 인라인 요소가 되지 않도록 설정 */
+            object-fit: cover; 
         }
 
         .profile-section h2 {
@@ -199,7 +200,7 @@
 
     <!-- 상단바 -->
     <div class="top-bar">
-        <img src="/mnt/data/image.png" alt="상단바 이미지">
+        <img src="store.png" alt="상단바 이미지">
     </div>
 
     <!-- 사이드 메뉴 -->
@@ -208,7 +209,7 @@
 
         <!-- 프로필 섹션 -->
         <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <img src="user.png" alt="프로필 이미지">
             <h2>내 프로필</h2>
         </div>
 
