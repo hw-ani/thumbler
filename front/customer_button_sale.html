@@ -48,6 +48,13 @@
             padding: 10px;
             font-size: 18px;
             flex-shrink: 0;
+            background-image: url('sale.png');
+            /* sale.png 이미지 추가 */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            /* 이미지 위치 조정 */
+            background-size: 30px 30px;
+            /* 이미지 크기 조정 */
         }
 
         /* 지역 선택 그리드 */
@@ -90,10 +97,15 @@
         }
 
         .bottom-nav a {
-            text-align: center;
-            color: white;
-            font-size: 12px;
             text-decoration: none;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
 
         .bottom-nav img {
@@ -176,7 +188,7 @@
 
     <!-- 초록색 바 (마감세일) -->
     <div class="sale-bar">
-        마감세일
+
     </div>
 
     <!-- 지역 선택 그리드 -->
@@ -195,23 +207,22 @@
     <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
         <a href="customer_button_store.html">
-            <img src="icons/search.svg" alt="포인트 상점">
-            포인트 상점
-        </a>
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
         <a href="customer_affiliate_store.html">
-            <img src="icons/search.svg" alt="제휴상점">
+            <img src="store.png" alt="제휴상점">
             제휴상점
         </a>
         <a href="customer_button_qrscan.html">
-            <img src="icons/notification.svg" alt="QR스캔">
+            <img src="qr.png" alt="QR스캔">
             QR스캔
         </a>
         <a href="customer_button_sale.html">
-            <img src="icons/profile.svg" alt="마감 세일">
+            <img src="sale.png" alt="마감 세일">
             마감 세일
         </a>
         <a href="customer_button_ranking.html">
-            <img src="icons/settings.svg" alt="유저 랭킹">
+            <img src="ranking.png" alt="유저 랭킹">
             유저 랭킹
         </a>
     </nav>

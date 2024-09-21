@@ -105,7 +105,7 @@
         .side-menu .profile-section img {
             width: 80px;
             height: 80px;
-            border-radius: 50%;
+            border-radius: 100%;
             background-color: white;
             padding: 10px;
         }
@@ -178,7 +178,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px auto;
+            margin: 5px auto;
             /* 여백 최소화 */
         }
 
@@ -191,7 +191,7 @@
         .points-section {
             text-align: center;
             font-size: 20px;
-            margin: 5px 0;
+            margin: 0px 0;
             /* 여백 줄임 */
             font-weight: bold;
         }
@@ -199,7 +199,8 @@
         .button-section {
             display: flex;
             justify-content: space-around;
-            margin: 5px 20px;
+            margin: 0px 0px 20px 20px;
+            /* 하단 네비게이션과 간격 추가 */
             flex-wrap: wrap;
         }
 
@@ -210,11 +211,11 @@
             border: none;
             border-radius: 10px;
             font-size: 12px;
-            width: 90px;
-            height: 90px;
+            width: 10px;
+            height: 10px;
             text-align: center;
             cursor: pointer;
-            margin: 5px;
+            margin: 0px;
         }
 
         .button-section button:hover {
@@ -252,10 +253,15 @@
         }
 
         .bottom-nav a {
-            text-align: center;
-            color: white;
-            font-size: 12px;
             text-decoration: none;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
 
         .bottom-nav i,
@@ -338,22 +344,27 @@
 
     <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
-        <a href="point_store.html">
-            <i class="fa-solid fa-coins"></i>포인트 상점
+        <a href="customer_button_store.html">
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
+        <a href="customer_affiliate_store.html">
+            <img src="store.png" alt="제휴상점">
+            제휴상점
         </a>
-        <a href="affiliate_store.html">
-            <img src="icons/search.svg" alt="Search">제휴상점
+        <a href="customer_button_qrscan.html">
+            <img src="qr.png" alt="QR스캔">
+            QR스캔
         </a>
-        <a href="qr_scan.html">
-            <img src="icons/notification.svg" alt="QR Scan">QR스캔
+        <a href="customer_button_sale.html">
+            <img src="sale.png" alt="마감 세일">
+            마감 세일
         </a>
-        <a href="sale.html">
-            <img src="icons/profile.svg" alt="Sale">마감 세일
-        </a>
-        <a href="user_ranking.html">
-            <img src="icons/settings.svg" alt="Ranking">유저 랭킹
+        <a href="customer_button_ranking.html">
+            <img src="ranking.png" alt="유저 랭킹">
+            유저 랭킹
         </a>
     </nav>
+
 
 </body>
 
