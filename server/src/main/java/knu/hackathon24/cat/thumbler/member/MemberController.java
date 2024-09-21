@@ -64,7 +64,7 @@ public class MemberController {
         UserProfileResponseDTO profileResponse = new UserProfileResponseDTO(
                 userMember.getNickname(),
                 userMember.getPoint().getRemains(),
-                "https://image.org/test/" + userMember.getId()
+                "https://i.ibb.co/x6Qpxnp/Kakao-Talk-Photo-2024-09-22-02-53-56.png"
         );
 
         return ResponseEntity.ok(profileResponse);
