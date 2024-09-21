@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         if (userType === 'consumer') {
             window.location.href = 'customer_home.html';
         } else if (userType === 'seller') {
-            window.location.href = 'seller_home.html';
+            window.location.href = 'seller_main1.html';
         }
     } else {
         alert('Please fill in all fields.');
