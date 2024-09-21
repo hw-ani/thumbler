@@ -3,7 +3,9 @@ package knu.hackathon24.cat.thumbler.session;
 import java.util.HashMap;
 import java.util.UUID;
 
+import knu.hackathon24.cat.thumbler.location.Location;
 import knu.hackathon24.cat.thumbler.point.Point;
+import knu.hackathon24.cat.thumbler.store.Store;
 import knu.hackathon24.cat.thumbler.storeMember.StoreMember;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,11 @@ public class Session {
     Point point1 = new Point();
     UserMember testUserMember = new UserMember("hwan", "010-1234-5678", "hwani", "jh1", "hwan", "kakao", "3333", point1);
     this.userSessionStorage.put("testUserSessionId", testUserMember);
+
+    Location location = new Location("15.123", "123.32");
+    Store store = new Store("경북식당", "대구광역시 북구 200번지", "010-1234-5678", "1234567890", location);
+    StoreMember testStoreMember = new StoreMember("차차차", "010-1234-5678", "first@gmail.com", "cha", "chacha", store);
+    this.storeSessionStorage.put("testStoreSessionId", testStoreMember);
   }
 
   public static Session getInstance() {
