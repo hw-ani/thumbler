@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>thumb-ler</title>
-
+    <title>thumb-ler - 지역 선택</title>
     <style>
-        /* 기본 스타일 */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
+        /* 상단 흰색 바 */
         header {
             background-color: white;
             display: flex;
@@ -29,7 +30,7 @@
 
         header a.logo {
             text-decoration: none;
-            color: #255852;
+            color: #004d40;
             font-size: 24px;
             font-weight: bold;
         }
@@ -39,22 +40,70 @@
             cursor: pointer;
         }
 
-        /* 상단바 구분 */
-        .top-bar {
-            background-color: #255852;
-            display: flex;
-            justify-content: center;
-            padding: 15px 0;
+        /* 초록색 바 */
+        .sale-bar {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
             flex-shrink: 0;
         }
 
-        /* 상단바의 이미지 */
-        .top-bar img {
-            width: 40px;
-            height: 40px;
+        /* 지역 선택 그리드 */
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 40px 20px;
+            flex-grow: 1;
         }
 
-        /* 사이드 메뉴 */
+        .region-grid button {
+            background-color: white;
+            color: #004d40;
+            border: 2px solid #004d40;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            height: 100px;
+        }
+
+        .region-grid button:hover {
+            background-color: #e0f2f1;
+        }
+
+        /* 하단 네비게이션 */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #004d40;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        .bottom-nav a {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .bottom-nav img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+
+        /* 수정된 사이드 메뉴 스타일 */
         .side-menu {
             height: 100%;
             width: 250px;
@@ -79,6 +128,7 @@
             font-size: 20px;
             color: white;
             display: block;
+            transition: 0.3s;
             border-bottom: 1px solid white;
         }
 
@@ -97,6 +147,7 @@
         /* 프로필 섹션 */
         .profile-section {
             text-align: center;
+            margin-bottom: 0;
             border-bottom: 1px solid white;
             padding-bottom: 10px;
         }
@@ -113,87 +164,32 @@
             font-size: 18px;
             margin-top: 10px;
         }
-
-        .qr-section {
-            background-color: white;
-            border: 1px solid #004d40;
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-            border-radius: 10px;
-        }
-
-        .qr-section img {
-            max-width: 100%;
-        }
-
-        /* 하단 네비게이션 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #255852;
-            color: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-        }
-
-        .bottom-nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .bottom-nav img {
-            width: 25px;
-            height: 25px;
-            margin-bottom: 5px;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- 상단바 -->
     <header>
         <a href="#" class="logo" onclick="goToMainPage()">thumb-ler</a>
         <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
     </header>
 
-    <!-- 상단바 아래 이미지 -->
-    <div class="top-bar">
-        <img src="/mnt/data/image.png" alt="상단바 이미지">
+    <!-- 초록색 바 (마감세일) -->
+    <div class="sale-bar">
+        마감세일
     </div>
 
-    <!-- 사이드 메뉴 -->
-    <div id="sideMenu" class="side-menu">
-        <span class="close-btn" onclick="toggleMenu()">&times;</span>
-
-        <!-- 프로필 섹션 -->
-        <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
-            <h2>내 프로필</h2>
-        </div>
-
-        <a href="mypage.html">My page 이동하기</a>
-        <a href="setting.html">설정</a>
-        <a href="#" onclick="showContact()">문의하기</a>
-        <a href="index.html">로그아웃</a>
-    </div>
-
-    <!-- 메인 콘텐츠 -->
-    <div class="main-content">
-        <div class="qr-section">
-            <img src="https://image.org/test/12" alt="tree">
-        </div>
+    <!-- 지역 선택 그리드 -->
+    <div class="region-grid">
+        <button onclick="location.href='customer_button_sale_list.html'">북구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">서구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">동구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">수성구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">중구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">달서구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">남구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">달성군</button>
+        <button onclick="location.href='customer_button_sale_list.html'">군위군</button>
     </div>
 
     <!-- 하단 네비게이션 -->
@@ -220,7 +216,22 @@
         </a>
     </nav>
 
-    <!-- JavaScript -->
+    <!-- 사이드 메뉴 -->
+    <div id="sideMenu" class="side-menu">
+        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <h2>내 프로필</h2>
+        </div>
+
+        <a href="mypage.html">My page 이동하기</a>
+        <a href="setting.html">설정</a>
+        <a href="#" onclick="showContact()">문의하기</a>
+        <a href="index.html">로그아웃</a>
+    </div>
+
     <script>
         function goToMainPage() {
             window.location.href = "customer_home.html";
