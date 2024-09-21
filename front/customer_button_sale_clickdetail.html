@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             display: flex;
             flex-direction: column;
         }
+
         /* 상단 로고 */
         .header {
             background-color: white;
@@ -20,13 +22,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid #004d40; /* 상단바 아래에 구분선을 추가 */
+            border-bottom: 4px solid #004d40;
+            /* 상단바 아래에 구분선을 추가 */
         }
+
         .logo {
             font-size: 24px;
             color: #255852;
             text-decoration: none;
         }
+
         .menu-btn {
             font-size: 24px;
             color: black;
@@ -37,10 +42,12 @@
 
         /* 상단바 (SALE 부분) */
         .top-bar {
-            background-color: #255852; /* 배경 색상을 변경 */
+            background-color: #255852;
+            /* 배경 색상을 변경 */
             padding: 15px;
             text-align: center;
         }
+
         .sale-icon {
             color: white;
             font-size: 24px;
@@ -54,11 +61,13 @@
             z-index: 1;
             top: 0;
             right: 0;
-            background-color: #255852; /* 슬라이드 메뉴의 색을 변경 */
+            background-color: #255852;
+            /* 슬라이드 메뉴의 색을 변경 */
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            /* 그림자 추가 */
         }
 
         .side-menu.open {
@@ -71,7 +80,8 @@
             font-size: 20px;
             color: white;
             display: block;
-            border-bottom: 1px solid white; /* 하얀색 구분선 */
+            border-bottom: 1px solid white;
+            /* 하얀색 구분선 */
         }
 
         .side-menu a:hover {
@@ -89,9 +99,12 @@
         /* 프로필 섹션 */
         .profile-section {
             text-align: center;
-            margin-bottom: 0; /* 하단 마진 제거 */
-            border-bottom: 1px solid white; /* 프로필과 My Page 구분 */
-            padding-bottom: 10px; /* 다른 메뉴들과 동일한 간격 */
+            margin-bottom: 0;
+            /* 하단 마진 제거 */
+            border-bottom: 1px solid white;
+            /* 프로필과 My Page 구분 */
+            padding-bottom: 10px;
+            /* 다른 메뉴들과 동일한 간격 */
         }
 
         .profile-section img {
@@ -105,7 +118,8 @@
         .profile-section h2 {
             font-size: 18px;
             margin-top: 10px;
-            color: white; /* 텍스트 색상을 흰색으로 변경 */
+            color: white;
+            /* 텍스트 색상을 흰색으로 변경 */
         }
 
         /* 메인 컨텐츠 */
@@ -114,15 +128,18 @@
             padding: 80px 20px 70px 20px;
             overflow-y: auto;
         }
+
         .product-image {
             width: 100%;
             height: 250px;
             background-color: #ccc;
             margin-bottom: 20px;
         }
+
         .product-info {
             text-align: center;
         }
+
         .input-field {
             width: 100%;
             padding: 10px;
@@ -137,9 +154,11 @@
             align-items: center;
             margin: 10px 0;
         }
+
         .total-price {
             font-size: 18px;
         }
+
         .reserve-button {
             padding: 10px 20px;
             background-color: #004d40;
@@ -149,6 +168,7 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         .reserve-button:hover {
             background-color: #00352d;
         }
@@ -164,18 +184,26 @@
             width: 100%;
             z-index: 1000;
         }
+
         .bottom-nav a {
-            color: white;
             text-decoration: none;
+            color: white;
             font-size: 14px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
+
         .bottom-nav a img {
             display: block;
             margin: 0 auto 5px;
         }
     </style>
 </head>
+
 <body>
 
     <!-- 상단 로고 -->
@@ -228,29 +256,29 @@
         </div>
     </div>
 
-    <!-- 하단 바 -->
+    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
         <a href="customer_button_store.html">
-            <img src="icons/search.svg" alt="포인트 상점">
-            포인트 상점
-        </a>
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
         <a href="customer_affiliate_store.html">
-            <img src="icons/search.svg" alt="제휴상점">
+            <img src="store.png" alt="제휴상점">
             제휴상점
         </a>
         <a href="customer_button_qrscan.html">
-            <img src="icons/notification.svg" alt="QR스캔">
+            <img src="qr.png" alt="QR스캔">
             QR스캔
         </a>
         <a href="customer_button_sale.html">
-            <img src="icons/profile.svg" alt="마감 세일">
+            <img src="sale.png" alt="마감 세일">
             마감 세일
         </a>
         <a href="customer_button_ranking.html">
-            <img src="icons/settings.svg" alt="유저 랭킹">
+            <img src="ranking.png" alt="유저 랭킹">
             유저 랭킹
         </a>
     </nav>
+
 
     <script>
         function toggleMenu() {
@@ -271,4 +299,5 @@
         }
     </script>
 </body>
+
 </html>

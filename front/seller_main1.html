@@ -36,6 +36,18 @@
             font-size: 36px;
             font-weight: bold;
         }
+        .logout-button {
+            background-color: #255852;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .logout-button:hover {
+            background-color: #1e4640;
+        }
         .welcome-box {
             background-color: #e6fffa;
             color: #255852;
@@ -156,6 +168,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">thumb-ler</div>
+            <button class="logout-button" onclick="location.href='index.html'">로그아웃</button>
         </div>
         <div class="welcome-box">
             🏪 ooo 사업자님! 안녕하세요! 🍃
@@ -164,7 +177,7 @@
             <button class="grid-button" onclick="location.href='seller_main_ordercheck.html'">주문조회</button>
             <button class="grid-button" onclick="location.href='seller_main_qr_scan.html'">QR인식</button>
             <button class="grid-button" onclick="location.href='seller_main_foodregister.html'">제품등록</button>
-            <button class="grid-button" onclick="location.href='points.html'">포인트</button>
+            <button class="grid-button" onclick="location.href='seller_main_editinfo.html'">가게정보수정</button>
         </div>        
         <div class="icon-row">
             <span>🏃</span>
