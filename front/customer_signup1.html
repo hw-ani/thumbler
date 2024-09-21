@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>소비자 회원가입</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -15,7 +14,7 @@
         <h1>thumb-ler</h1>
 
 
-        <form action="customer_signup2.html" method="POST">
+        <form id="signupForm" action="customer_signup2.html" method="GET">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required>
 
@@ -27,12 +26,14 @@
     </div>
 </body>
 
-</html>
-
 <script>
-    let name = document.querySelector("#id");
-    let contact = document.querySelector('#contact');
+    document.getElementById('signupForm').addEventListener('submit', function (event) {
+        let name = document.querySelector("#name").value;
+        let contact = document.querySelector('#contact').value;
 
-
-    axios.post();
+        localStorage.setItem('name', name);
+        localStorage.setItem('contact', contact);
+    });
 </script>
+
+</html>

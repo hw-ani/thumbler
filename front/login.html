@@ -6,45 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>thumb-ler Login</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        function submitLoginForm(event) {
-            event.preventDefault();
-
-            //데이터수집
-            const userId = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            //api로 보낼 데이터 객체
-            const requestBody = {
-                "class": 0,
-                "userId": userId,
-                "password": password
-            };
-
-            fetch('/member/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestbody)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        //로그인 성공 시
-                        alert('로그인 성공');
-                        window.location.href = 'home.html'; // 성공 시 홈 페이지로 이동
-                    } else {
-                        alert('로그인 실패: ' + data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert('오류가 발생했습니다.');
-                });
-        }
-
-    </script>
 </head>
 
 <body>
@@ -69,7 +30,67 @@
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
+
+<script>
+    function submitLoginForm(event) {
+        event.preventDefault();
+
+        //데이터수집
+        const userId = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const userType = document.querySelector('input[name="userType"]:checked').value; // 소비자 또는 판매자 선택
+
+        // URL을 사용자의 타입에 따라 설정
+        let loginUrl = '';
+
+        if (userType === 'consumer') {
+            loginUrl = 'http://43.200.62.183:8080/member/users/login'; // 소비자 로그인
+        } else if (userType === 'seller') {
+            loginUrl = 'http://43.200.62.183:8080/member/owner/login'; // 판매자 로그인
+        }
+
+        //api로 보낼 데이터 객체
+        const requestBody = {
+            "class": 0,
+            "userId": userId,
+            "password": password
+        };
+
+        console.log(requestBody);
+
+        fetch(loginUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                console.log('Response:', response); // 응답 로그 확인
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data:', data); // 응답 데이터 확인
+                if (data) {
+                    //로그인 성공 시
+                    alert('로그인 성공');
+                    window.location.href = 'customer_home.html'; // 성공 시 홈 페이지로 이동
+                } else {
+                    alert('로그인 실패: ' + data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('오류가 발생했습니다.');
+            });
+    }
+
+</script>
 
 </html>

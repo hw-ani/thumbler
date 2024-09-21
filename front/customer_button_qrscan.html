@@ -97,23 +97,25 @@
 
         /* 프로필 섹션 */
         .profile-section {
-        text-align: center;
-        margin-bottom: 0;
-        border-bottom: 1px solid white;
-        padding-bottom: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+            text-align: center;
+            margin-bottom: 0;
+            border-bottom: 1px solid white;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-section img {
             width: 80px;
             height: 80px;
-            border-radius: 50%; /* 원형으로 유지 */
+            border-radius: 50%;
+            /* 원형으로 유지 */
             background-color: white;
-            display: block; /* 인라인 요소가 되지 않도록 설정 */
-            object-fit: cover; 
+            display: block;
+            /* 인라인 요소가 되지 않도록 설정 */
+            object-fit: cover;
         }
 
         .profile-section h2 {
@@ -144,6 +146,13 @@
             color: #255852;
             font-size: 20px;
             font-weight: bold;
+            position: relative;
+        }
+
+        .qr-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         /* 위아래 선 */
@@ -225,8 +234,8 @@
         <div class="divider"></div>
 
         <!-- 큐알 코드 틀 -->
-        <div class="qr-container">
-            큐알
+        <div class="qr-container" id="qrContainer">
+            큐알 로딩 중...
         </div>
 
         <div class="divider"></div>
@@ -275,6 +284,29 @@
         function showContact() {
             alert("thumblerfor@gmail.com 이메일로 연락 주세요");
         }
+
+        function loadQRCode() {
+            fetch('https://example.com/qrcode/customer/generate', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': 'sessionId=abcd1234'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const qrContainer = document.getElementById('qrContainer');
+                    qrContainer.innerHTML = `<img src="${data.qrCodeUrl}" alt="QR 코드">`;
+                })
+                .catch(error => {
+                    console.error('QR 코드를 불러오는 중 오류 발생:', error);
+                    document.getElementById('qrContainer').textContent = '큐알 코드를 불러오지 못했습니다.';
+                });
+        }
+
+        // 페이지가 로드되면 QR 코드 로드
+        window.onload = loadQRCode;
     </script>
 
 </body>
