@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 등록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: white; /* 상단 바 전체 배경색 */
+            border-bottom: 4px solid #255852; /* 상단바 아래 구분선 */
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #255852;
+            text-decoration: none;
+        }
+
+        .header-bar {
+            width: 100%;
+            background-color: #255852; /* 상단바 배경색 */
+            text-align: center;
+            padding: 15px;
+        }
+
+        .header-bar img {
+            width: 30px;
+            height: 30px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #255852;
+            padding: 10px;
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .content img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #255852;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .info {
+            margin-bottom: 10px;
+        }
+
+        .info label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        .register-btn {
+            background-color: #255852;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            width: 100px;
+            text-align: center;
+        }
+
+        .register-btn:hover {
+            background-color: #1e4842;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        /* 반응형 디자인 */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+                max-width: 100%;
+            }
+
+            header .logo {
+                font-size: 18px;
+            }
+
+            .content img {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            textarea {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="seller_main1.html" class="logo">thumb-ler</a>
+        </header>
+        <!-- 상단바 구분용 바 -->
+        <div class="header-bar">
+            <img src="/mnt/data/image.png" alt="Icon"> <!-- 여기에 이미지 삽입 -->
+        </div>
+        <div class="content">
+            <!-- 이미지 클릭 시 파일 첨부 창이 열림 -->
+            <img src="placeholder.png" alt="상품 이미지" id="product-image" onclick="document.getElementById('file-input').click();">
+            <!-- 파일 첨부 input, 숨겨져 있음 -->
+            <input type="file" id="file-input" class="hidden-input" accept="image/*" onchange="loadImage(event)">
+            <form id="product-form">
+                <div class="info">
+                    <label for="deadline">마감시간</label>
+                    <input type="datetime-local" id="deadline" name="deadline" required>
+
+                    <label for="product-name">상품명</label>
+                    <input type="text" id="product-name" name="product-name" required>
+
+                    <label for="original-price">원래가격</label>
+                    <input type="number" id="original-price" name="original-price" required>
+
+                    <label for="discounted-price">할인된 가격</label>
+                    <input type="number" id="discounted-price" name="discounted-price" required>
+
+                    <label for="quantity">개수</label>
+                    <input type="number" id="quantity" name="quantity" required>
+                </div>
+
+                <label for="description">상품 설명</label>
+                <textarea id="description" name="description" placeholder="상품 설명" required></textarea>
+
+                <button type="submit" class="register-btn">등록</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 파일 업로드 시 선택한 이미지를 표시하는 함수
+        function loadImage(event) {
+            const image = document.getElementById('product-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.onload = function() {
+                URL.revokeObjectURL(image.src);
+            }
+        }
+
+        // 폼 제출 시 데이터를 서버로 보내는 함수
+        document.getElementById('product-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // 성공 메시지를 먼저 표시
+            alert("등록이 완료되었습니다.");
+
+            // 폼 리셋
+            document.getElementById('product-form').reset(); 
+            document.getElementById('product-image').src = "placeholder.png"; // 이미지 초기화
+
+            // 서버 요청 보내기 (옵션)
+            const formData = new FormData(this);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("서버 응답:", data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

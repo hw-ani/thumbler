@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thumb-ler - My Page</title>
+    <link rel="stylesheet" href="mypage_styles.css">
+    <style>
+        /* 기본 스타일 */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: #255852;
+            border-bottom: 2px solid #255852;
+            flex-shrink: 0;
+        }
+
+        header a.logo {
+            text-decoration: none;
+            color: #255852;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .top-bar {
+            background-color: #255852;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            flex-shrink: 0;
+        }
+
+        .top-bar img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .side-menu {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            background-color: #255852;
+            color: white;
+            z-index: 1;
+            transition: 0.3s ease;
+            padding-top: 60px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            border-bottom: 1px solid white;
+        }
+
+        .side-menu a:hover {
+            background-color: #457d68;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            cursor: pointer;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .profile-picture {
+            background-color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 80px;
+            text-align: center;
+            color: #004d40;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .profile-info {
+            font-size: 18px;
+        }
+
+        .ranking {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .image-box {
+            background-color: white;
+            border: 2px solid #004d40;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 20px;
+            width: 80%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .points-section {
+            text-align: center;
+            font-size: 20px;
+            margin: 10px 0 5px;
+            /* 포인트 섹션과 버튼 사이의 간격을 좁힘 */
+            font-weight: bold;
+        }
+
+        .button-section {
+            display: flex;
+            justify-content: space-around;
+            margin: 5px 20px;
+            /* 버튼과 포인트 섹션 사이 간격 조정 */
+            flex-wrap: wrap;
+        }
+
+        .button-section button {
+            background-color: #004d40;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 12px;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button-section button:hover {
+            background-color: #00796b;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #004d40;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .bottom-nav a {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .bottom-nav i,
+        .bottom-nav img {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+    <script>
+        function goToMainPage() {
+            window.location.href = "customer_home.html";
+        }
+
+        function toggleMenu() {
+            var sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+
+        function showContact() {
+            alert("thumblerfor@gmail.com 이메일로 연락 주세요");
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 상단 메뉴 바 -->
+    <header>
+        <a href="#" class="logo" onclick="goToMainPage()">thumb-ler</a>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    </header>
+
+    <!-- 사이드 메뉴 -->
+    <div id="sideMenu" class="side-menu">
+        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <h2>내 프로필</h2>
+        </div>
+
+        <a href="mypage.html">My page 이동하기</a>
+        <a href="setting.html">설정</a>
+        <a href="#" onclick="showContact()">문의하기</a>
+        <a href="index.html">로그아웃</a>
+    </div>
+
+    <!-- 프로필 섹션 -->
+    <div class="profile-section">
+        <div class="profile-picture">👤</div>
+        <div>
+            <div class="profile-info">배고픈 너구리 님</div>
+            <div class="ranking">005등!</div>
+        </div>
+    </div>
+
+    <!-- 이미지 박스 -->
+    <div class="image-box">
+        <img src="https://image.org/test/12" alt="나무 성장">
+    </div>
+
+    <!-- 포인트 섹션 -->
+    <div class="points-section">
+        2,009 points
+    </div>
+
+    <!-- 버튼 섹션 -->
+    <div class="button-section">
+        <button>출금</button>
+        <button>기부</button>
+        <button>내역 조회</button>
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="point_store.html">
+            <i class="fa-solid fa-coins"></i>포인트 상점
+        </a>
+        <a href="affiliate_store.html">
+            <img src="icons/search.svg" alt="Search">제휴상점
+        </a>
+        <a href="qr_scan.html">
+            <img src="icons/notification.svg" alt="QR Scan">QR스캔
+        </a>
+        <a href="sale.html">
+            <img src="icons/profile.svg" alt="Sale">마감 세일
+        </a>
+        <a href="user_ranking.html">
+            <img src="icons/settings.svg" alt="Ranking">유저 랭킹
+        </a>
+    </nav>
+
+</body>
+
+</html>

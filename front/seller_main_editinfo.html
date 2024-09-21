@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가게 정보 수정</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: #255852;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .header-bar {
+            background-color: #255852;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header-bar img {
+            width: 40px;
+            height: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .photo-box {
+            width: 100%;
+            height: 150px;
+            border: 1px dashed #255852;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .photo-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .submit-btn {
+            background-color: #255852;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e4842;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="seller_main1.html" class="logo">thumb-ler</a>
+        </header>
+
+        <div class="header-bar">
+            <img src="/mnt/data/image.png" alt="가게 아이콘">
+        </div>
+
+        <form id="store-form">
+            <!-- 사진 등록 -->
+            <div class="photo-box" onclick="document.getElementById('photo-input').click();">
+                <span id="photo-text">가게 사진 등록</span>
+                <img id="photo-preview" style="display:none;" alt="가게 사진 미리보기">
+                <input type="file" id="photo-input" style="display:none;" accept="image/*" onchange="previewImage(event)">
+            </div>
+
+            <!-- 상호명 -->
+            <label for="store-name">상호명</label>
+            <input type="text" id="store-name" name="store-name" placeholder="상호명">
+
+            <!-- 마감시간 -->
+            <label for="closing-time">마감시간</label>
+            <input type="time" id="closing-time" name="closing-time">
+
+            <!-- 휴무일 설정 -->
+            <label for="holiday">휴무일 설정</label>
+            <input type="text" id="holiday" name="holiday" placeholder="휴무일 설정">
+
+            <!-- 사업장 번호 -->
+            <label for="business-number">사업장 번호</label>
+            <input type="text" id="business-number" name="business-number" placeholder="사업장 번호">
+
+            <!-- 가게 소개 -->
+            <label for="store-intro">가게 소개</label>
+            <textarea id="store-intro" name="store-intro" placeholder="가게 소개"></textarea>
+
+            <!-- 수정 버튼 -->
+            <button type="submit" class="submit-btn">수정</button>
+        </form>
+    </div>
+
+    <script>
+        // 사진 미리보기 기능
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const preview = document.getElementById('photo-preview');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+                document.getElementById('photo-text').style.display = 'none';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // 폼 제출 이벤트 (여기선 제출만 확인)
+        document.getElementById('store-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 페이지 리로드 방지
+            alert('수정이 완료되었습니다.');
+            this.reset(); // 폼 리셋
+            document.getElementById('photo-preview').style.display = 'none';
+            document.getElementById('photo-text').style.display = 'block';
+            window.location.href = 'seller_main1.html';
+        });
+    </script>
+</body>
+</html>

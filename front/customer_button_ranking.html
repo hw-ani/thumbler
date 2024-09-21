@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: #255852;
+            border-bottom: 2px solid #255852;
+            flex-shrink: 0;
+        }
+
+        header a.logo {
+            text-decoration: none;
+            color: #004d40;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* 초록색 바 */
+        .sale-bar {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            margin: 10px;
+            border: 1px solid #004d40;
+            border-radius: 10px;
+        }
+
+        .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 10px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            font-size: 18px;
+            color: black;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            color: #004d40;
+        }
+
+        /* Main Content (Ranking Section) */
+        .content-box {
+            flex-grow: 1;
+            border: 1px solid #004d40;
+            margin: 10px;
+            background-color: white;
+            overflow-y: scroll;
+        }
+
+        .ranking-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ranking-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #004d40;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .bottom-nav img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+
+        /* 사이드 메뉴 */
+        .side-menu {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            background-color: #255852;
+            color: white;
+            z-index: 1;
+            transition: 0.3s ease;
+            padding-top: 60px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid white;
+        }
+
+        .side-menu a:hover {
+            background-color: #457d68;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            cursor: pointer;
+        }
+
+        /* 프로필 섹션 */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 0;
+            border-bottom: 1px solid white;
+            padding-bottom: 10px;
+        }
+
+        .profile-section img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .profile-section h2 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-picture {
+                width: 40px;
+                height: 40px;
+            }
+
+            .profile-info h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo" onclick="goToMainPage()">thumb-ler</a>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    </header>
+
+    <!-- 초록색 바 (마감세일) -->
+    <div class="sale-bar">
+        마감세일
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <div class="profile-picture" id="profilePic"></div>
+        <div class="profile-info">
+            <h2 id="nickname">닉네임</h2>
+            <p id="ranking">현재 ○○님은 ○등이에요!</p>
+        </div>
+    </div>
+
+    <!-- Main Content Box (Ranking List) -->
+    <div class="content-box">
+        <ul class="ranking-list" id="rankingList">
+            <!-- Ranking items will be populated by JavaScript -->
+        </ul>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="customer_button_store.html">
+            <img src="icons/search.svg" alt="포인트 상점">
+            포인트 상점
+        </a>
+        <a href="customer_affiliate_store.html">
+            <img src="icons/search.svg" alt="제휴상점">
+            제휴상점
+        </a>
+        <a href="customer_button_qrscan.html">
+            <img src="icons/notification.svg" alt="QR스캔">
+            QR스캔
+        </a>
+        <a href="customer_button_sale.html">
+            <img src="icons/profile.svg" alt="마감 세일">
+            마감 세일
+        </a>
+        <a href="customer_button_ranking.html">
+            <img src="icons/settings.svg" alt="유저 랭킹">
+            유저 랭킹
+        </a>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div id="sideMenu" class="side-menu">
+        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <h2>내 프로필</h2>
+        </div>
+
+        <a href="mypage.html">My page 이동하기</a>
+        <a href="setting.html">설정</a>
+        <a href="#" onclick="showContact()">문의하기</a>
+        <a href="index.html">로그아웃</a>
+    </div>
+
+    <script>
+        function goToMainPage() {
+            window.location.href = "customer_home.html";
+        }
+
+        function toggleMenu() {
+            var sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+
+        function showContact() {
+            alert("thumblerfor@gmail.com 이메일로 연락 주세요");
+        }
+
+        // Example backend data fetching simulation
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simulate data fetching from the backend for profile
+            let userProfile = {
+                nickname: "홍길동",
+                ranking: "3등",
+                profilePicture: "profile.jpg" // URL to the profile picture
+            };
+
+            // Populate the HTML elements with backend data
+            document.getElementById('nickname').textContent = userProfile.nickname;
+            document.getElementById('ranking').textContent = `현재 ${userProfile.nickname}님은 ${userProfile.ranking}이에요!`;
+            document.getElementById('profilePic').style.backgroundImage = `url(${userProfile.profilePicture})`;
+
+            // Simulate ranking data
+            let rankings = [
+                "1위: 홍길동",
+                "2위: 이순신",
+                "3위: 세종대왕",
+                "4위: 강감찬",
+                "5위: 유관순",
+                "6위: 장보고",
+                "7위: 김구",
+                "8위: 윤봉길",
+                "9위: 신사임당",
+                "10위: 안중근"
+            ];
+
+            let rankingList = document.getElementById('rankingList');
+            rankings.forEach(function (rank) {
+                let li = document.createElement('li');
+                li.textContent = rank;
+                rankingList.appendChild(li);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

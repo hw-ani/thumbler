@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thumb-ler</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh; /* 화면 전체 높이 설정 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: #255852;
+            flex-shrink: 0;
+        }
+
+        header a.logo {
+            text-decoration: none;
+            color: #255852;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* 상단바 구분 */
+        .top-bar {
+            background-color: #255852;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            flex-shrink: 0;
+        }
+
+        /* 상단바의 이미지 */
+        .top-bar img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* 사이드 메뉴 */
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #255852;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .side-menu.open {
+            width: 250px;
+        }
+
+        .side-menu a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            border-bottom: 1px solid white; /* 하얀색 구분선 */
+        }
+
+        .side-menu a:hover {
+            background-color: #457d68;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            cursor: pointer;
+        }
+
+        /* 프로필 섹션 */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 0; /* 하단 마진 제거 */
+            border-bottom: 1px solid white; /* 프로필과 메뉴 항목 구분 */
+            padding-bottom: 10px;
+        }
+
+        .profile-section img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .profile-section h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: white; /* 텍스트 색상을 흰색으로 변경 */
+        }
+
+        main {
+            flex-grow: 1;
+            overflow-y: auto; /* 스크롤 가능하게 설정 */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px; /* 고정된 높이 */
+            background-color: #ccc;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지 비율을 유지하면서 크기에 맞춤 */
+        }
+
+        .product-details {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .product-details h2 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+        }
+
+        /* 제품 상세 정보 영역 */
+        .product-info {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: left;
+            background-color: #f9f9f9;
+            margin-bottom: 80px; /* 구매 버튼을 위한 공간 확보 */
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* 구매 버튼 고정 */
+        .buy-button {
+            position: fixed;
+            bottom: 70px; /* 하단바 위쪽에 고정 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #255852;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .buy-button:hover {
+            background-color: #457d68;
+        }
+
+        /* 하단 네비게이션 스타일 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #255852;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            border-top: 1px solid #ccc;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-nav img {
+            width: 25px;
+            height: 25px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo" onclick="goToMainPage()">thumb-ler</a>
+        <span class="menu-icon" onclick="openSideMenu()">&#9776;</span>
+    </header>
+
+    <!-- 상단바와 이미지 -->
+    <div class="top-bar">
+        <img src="/mnt/data/image.png" alt="상단바 이미지">
+    </div>
+
+    <!-- 사이드 메뉴 -->
+    <div id="side-menu" class="side-menu">
+        <span class="close-btn" onclick="closeSideMenu()">&times;</span>
+
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <h2>내 프로필</h2>
+        </div>
+
+        <a href="mypage.html">My page 이동하기</a>
+        <a href="setting.html">설정</a>
+        <a href="#" onclick="showContact()">문의하기</a>
+        <a href="index.html">로그아웃</a>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <div class="product-image">
+            <img src="/mnt/data/image.png" alt="상품 이미지">
+        </div>
+
+        <div class="product-details">
+            <h2>상품명</h2>
+            <h3>가격</h3>
+            <p>나의 잔여포인트 : XXXXXX</p>
+            <p>텀블러를 X번 더 이용하면 이 제품을 구매할 수 있어요!</p>
+        </div>
+
+        <!-- 제품 상세 정보 -->
+        <div class="product-info">
+            <h3>제품 상세 정보</h3>
+            <p>서버에서 불러온 제품의 세부 정보를 여기에 표시할 수 있습니다.</p>
+            <p>예: 재질, 크기, 무게, 제조사 등</p>
+        </div>
+
+        <!-- 구매 버튼 -->
+        <button class="buy-button" onclick="purchaseProduct()">구매</button>
+    </main>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="customer_button_store.html">
+            <img src="icons/search.svg" alt="포인트 상점">
+            포인트 상점
+        </a>
+        <a href="customer_affiliate_store.html">
+            <img src="icons/search.svg" alt="제휴상점">
+            제휴상점
+        </a>
+        <a href="customer_button_qrscan.html">
+            <img src="icons/notification.svg" alt="QR스캔">
+            QR스캔
+        </a>
+        <a href="sale.html">
+            <img src="icons/profile.svg" alt="마감 세일">
+            마감 세일
+        </a>
+        <a href="user_ranking.html">
+            <img src="icons/settings.svg" alt="유저 랭킹">
+            유저 랭킹
+        </a>
+    </nav>
+
+    <script>
+        function goToMainPage() {
+            // 메인 페이지로 이동하는 코드
+            window.location.href = "customer_home.html";
+        }
+
+        function openSideMenu() {
+            document.getElementById("side-menu").style.width = "250px";
+        }
+
+        function closeSideMenu() {
+            document.getElementById("side-menu").style.width = "0";
+        }
+
+        function purchaseProduct() {
+            // 구매 완료 메시지 표시
+            alert("구매가 완료되었습니다.");
+        }
+
+        function showContact() {
+            alert("thumblerfor@gmail.com 이메일로 연락 주세요");
+        }
+    </script>
+
+</body>
+</html>

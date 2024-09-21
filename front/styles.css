@@ -1,0 +1,76 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #2F4F4F;
+    margin-bottom: 2rem;
+}
+
+form {
+    width: 80%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #2F4F4F;
+    margin-bottom: 0.5rem;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid #2F4F4F;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    outline: none;
+}
+
+.next-button {
+    background-color: #2F4F4F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.next-button:hover {
+    background-color: #3B5C5C;
+
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.radio-buttons label {
+    font-size: 1rem;
+    color: #2F4F4F;
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+
+}
