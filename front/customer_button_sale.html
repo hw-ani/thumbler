@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thumb-ler - 지역 선택</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* 상단 흰색 바 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #004d40;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .menu-icon div {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+        }
+
+        /* 초록색 바 */
+        .sale-bar {
+            background-color: #004d40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        /* 지역 선택 그리드 */
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 40px 20px;
+        }
+
+        .region-grid button {
+            background-color: white;
+            color: #004d40;
+            border: 2px solid #004d40;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            height: 100px;
+            /* 정사각형 버튼 */
+        }
+
+        .region-grid button:hover {
+            background-color: #e0f2f1;
+        }
+
+        /* 하단 네비게이션 */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #004d40;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .bottom-nav a {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .bottom-nav img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 상단 흰색 바 -->
+    <div class="header">
+        <div class="logo" onclick="location.href='customer_home.html'">thumb-ler</div>
+        <div class="menu-icon" onclick="location.href='menu.html'">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- 초록색 바 (마감세일) -->
+    <div class="sale-bar">
+        마감세일
+    </div>
+
+    <!-- 지역 선택 그리드 -->
+    <div class="region-grid">
+        <button onclick="location.href='customer_button_sale_list.html'">북구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">서구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">동구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">수성구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">중구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">달서구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">남구</button>
+        <button onclick="location.href='customer_button_sale_list.html'">달성군</button>
+        <button onclick="location.href='customer_button_sale_list.html'">군위군</button>
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="customer_button_store.html">
+            <img src="icons/search.svg" alt="포인트 상점">
+            포인트 상점
+        </a>
+        <a href="customer_affiliate_store.html">
+            <img src="icons/search.svg" alt="제휴상점">
+            제휴상점
+        </a>
+        <a href="customer_button_qrscan.html">
+            <img src="icons/notification.svg" alt="QR스캔">
+            QR스캔
+        </a>
+        <a href="customer_button_sale.html">
+            <img src="icons/profile.svg" alt="마감 세일">
+            마감 세일
+        </a>
+        <a href="customer_button_ranking.html">
+            <img src="icons/settings.svg" alt="유저 랭킹">
+            유저 랭킹
+        </a>
+    </nav>
+
+</body>
+
+</html>
