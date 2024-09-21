@@ -1,22 +1,40 @@
 package knu.hackathon24.cat.thumbler.userMember;
 
+import knu.hackathon24.cat.thumbler.imageUpload.ImageUpload;
 import knu.hackathon24.cat.thumbler.point.Point;
 import knu.hackathon24.cat.thumbler.point.PointRepository;
+import knu.hackathon24.cat.thumbler.qrCode.QrCode;
+import knu.hackathon24.cat.thumbler.qrCode.QrCodeRepository;
 import knu.hackathon24.cat.thumbler.session.Session;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserMemberService {
 
     final private UserMemberRepository userMemberRepository;
     final private PointRepository pointRepository;
+    final private QrCodeRepository qrCodeRepository;
+    final private ImageUpload imageUpload;
     final private Session session;
 
     public UserMember registerUser(UserMemberRequest userMemberRequest) {
@@ -24,9 +42,12 @@ public class UserMemberService {
         Point point = new Point(0L);
         pointRepository.save(point);
 
+        // 빈 qr 객체 생성
+        QrCode qrCode = new QrCode();
+        qrCodeRepository.save(qrCode);
+
         // 비밀번호 해싱
         String hashedPassword = hashPassword(userMemberRequest.getPassword());
-
 
         // 사용자 생성
         UserMember userMember = new UserMember(
@@ -37,29 +58,30 @@ public class UserMemberService {
                 hashedPassword,
                 userMemberRequest.getBank(),
                 userMemberRequest.getAccount(),
-                point // 포인트를 함께 저장
+                point, // 포인트를 함께 저장
+                qrCode // 우선 빈 객체 저장
         );
+        userMemberRepository.save(userMember);
 
-        // 임시 사용자 생성
-        Point testPoint = new Point(0L);
-        pointRepository.save(testPoint);
+        // QR 코드 생성
+        byte[] qrCodeImage = generateQrCodeImageWithUserInfo(userMember.getUserId(), 500L);
+        String imageUrl;
+        if (qrCodeImage != null) {
+            // 이미지 base64로 변환 후 저장
+            String imageString = Base64.getEncoder().encodeToString(qrCodeImage);
+            imageUrl = imageUpload.uploadImage(imageString);
 
-        String testHashedPassword = hashPassword("test");
+            // QR 코드 URL 저장
+            userMember.getQrCode().setQrImageUrl(imageUrl);
+        } else {
+            throw new RuntimeException(("qr 생성 실패..."));
+        }
 
-        UserMember testUser = new UserMember(
-                "테스트이름",
-                "010-1234-5678",
-                "테스트닉네임",
-                "test",
-                testHashedPassword,
-                "우리은행",
-                "123-456-789",
-                testPoint
-        );
+        qrCode.setQrImageUrl(imageUrl);
+        UserMember originalUserMember = userMemberRepository.findById(userMember.getId()).orElse(null);
+        originalUserMember.setQrCode(qrCode);
 
-        userMemberRepository.save(testUser);
-
-        return userMemberRepository.save(userMember);
+        return userMemberRepository.save(originalUserMember);
     }
 
     public UserMember loginUser(String userId, String password, HttpServletResponse response) {
@@ -94,6 +116,22 @@ public class UserMemberService {
 
     public String issueUserSessionId(UserMember userMember) {
         return session.issueUserSessionId(userMember);
+    }
+
+    private byte[] generateQrCodeImageWithUserInfo(String userId, Long points) {
+        String data = String.format("https://example.com/scan?userId=%s&points=%d", userId, points);
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        try {
+            BitMatrix bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 200, 200);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            MatrixToImageWriter.writeToStream(bitMatrix, "PNG", byteArrayOutputStream);
+
+            // QR 코드 이미지를 바이트 배열로 반환
+            return byteArrayOutputStream.toByteArray();
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+            return null; // 오류 처리
+        }
     }
 }
 

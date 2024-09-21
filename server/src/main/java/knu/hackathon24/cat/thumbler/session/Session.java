@@ -22,10 +22,10 @@ public class Session {
 
   public void initForTest() {
     // 테스트를 위해 기본 계정 및 관련 영구 세션 생성
-    UserMember testUserMember = userMemberRepository.findById(1L).get();
+    UserMember testUserMember = userMemberRepository.findById(1L).orElse(null);
     this.userSessionStorage.put("testUserSessionId", testUserMember);
 
-    StoreMember testStoreMember = storeMemberRepository.findById(1L).get();
+    StoreMember testStoreMember = storeMemberRepository.findById(1L).orElse(null);
     this.storeSessionStorage.put("testStoreSessionId", testStoreMember);
   }
 
@@ -55,12 +55,12 @@ public class Session {
 
   public UserMember getUserMemberBySessionId(String sessionId) {
     UserMember userMemberTemp = userSessionStorage.get(sessionId);
-    return userMemberRepository.findById(userMemberTemp.getId()).get();
+    return userMemberRepository.findById(userMemberTemp.getId()).orElse(null);
   }
 
   public StoreMember getStoreMemberBySessionId(String sessionId) {
     StoreMember storeMemberTemp = storeSessionStorage.get(sessionId);
-    return storeMemberRepository.findById(storeMemberTemp.getId()).get();
+    return storeMemberRepository.findById(storeMemberTemp.getId()).orElse(null);
   }
 
   private String generateSessionId() {

@@ -39,7 +39,7 @@ public class ReservationController {
     Long count = requestBody.getCount();
     Long reservationTime = requestBody.getReservationTime();
     
-    Food food = foodRepository.findById(Long.parseLong(foodId)).get();
+    Food food = foodRepository.findById(Long.parseLong(foodId)).orElse(null);
     food.setAmount(count);
 
     UserMember userMember = session.getUserMemberBySessionId(sessionId);

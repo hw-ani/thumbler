@@ -24,9 +24,11 @@ public class QrCode {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "qr_image_url", nullable = false, length = 200)
+  @Column(name = "qr_image_url", nullable = true, length = 200)
   private String qrImageUrl;
 
   /********** interface **********/
-  // 프론트에서 인증해서 주면 어떤 유저인지 찾아봐야되려나?
+  public void setQrImageUrl(String qrImageUrl) {
+    this.qrImageUrl = qrImageUrl;
+  }
 }

@@ -59,7 +59,7 @@ public class FoodController {
 
   @GetMapping("/{foodId}")
   public Food getFoodInDetail(@PathVariable String foodId) {
-    return foodRepository.findById(Long.parseLong(foodId)).get();
+    return foodRepository.findById(Long.parseLong(foodId)).orElse(null);
   }
   
   @PostMapping()

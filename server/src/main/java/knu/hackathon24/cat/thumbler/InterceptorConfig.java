@@ -15,9 +15,10 @@ public class InterceptorConfig implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authCheckInterceptor)
-        .order(1)
-        .addPathPatterns("/**")
-        .excludePathPatterns("/store/near", "/member/*/register", "/member/login")
-        ;
+            .order(1)
+            .addPathPatterns("/**")
+            .excludePathPatterns("/store/near")
+            .excludePathPatterns("/member/**", "/member/users/register", "/member/owner/register"
+            ,"/member/user/login", "/member/owner/login");
     }
 }
