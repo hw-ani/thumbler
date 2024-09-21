@@ -61,26 +61,32 @@ public class StoreMemberService {
         );
         storeMemberRepository.save(storeMember);
 
+        // 테스트 스토어 및 사용자 생성
+        createTestStoreAndMember();
+
         return new StoreMemberRegisterResponseDto(
                 storeMember.getUserId()
         );
+
     }
 
-    public StoreMember loginStoreMember(String userId, String password, HttpServletResponse response) {
-        StoreMember storeMember = storeMemberRepository.findByUserId(userId);
-        if (storeMember != null && storeMember.getPassword().equals(hashPassword(password))) {
-            String sessionId = issueStoreSessionId(storeMember);
 
-            // 쿠키에 세션 ID 추가
-            Cookie cookie = new Cookie("SESSIONID", sessionId);
-            cookie.setHttpOnly(true); // JavaScript에서 접근하지 못하게 설정
-            cookie.setPath("/"); // 쿠키의 유효 범위를 설정 (기본적으로 모든 경로에서 유효)
-            response.addCookie(cookie); // 응답에 쿠키 추가
 
-            return storeMember; // 로그인 성공
-        }
-        throw new IllegalArgumentException("Invalid userId or password"); // 로그인 실패
-    }
+//    public StoreMember loginStoreMember(String userId, String password, HttpServletResponse response) {
+//        StoreMember storeMember = storeMemberRepository.findByUserId(userId);
+//        if (storeMember != null && storeMember.getPassword().equals(hashPassword(password))) {
+//            String sessionId = issueStoreSessionId(storeMember);
+//
+//            // 쿠키에 세션 ID 추가
+//            Cookie cookie = new Cookie("SESSIONID", sessionId);
+//            cookie.setHttpOnly(true); // JavaScript에서 접근하지 못하게 설정
+//            cookie.setPath("/"); // 쿠키의 유효 범위를 설정 (기본적으로 모든 경로에서 유효)
+//            response.addCookie(cookie); // 응답에 쿠키 추가
+//
+//            return storeMember; // 로그인 성공
+//        }
+//        throw new IllegalArgumentException("Invalid userId or password"); // 로그인 실패
+//    }
 
     private String hashPassword(String password) {
         try {
@@ -98,6 +104,33 @@ public class StoreMemberService {
 
     public String issueStoreSessionId(StoreMember storeMember) {
         return session.issueStoreSessionId(storeMember);
+    }
+
+    private void createTestStoreAndMember() {
+        // 테스트 Location 생성
+        Location testLocation = new Location(); // 위치 정보 설정
+        locationRepository.save(testLocation);
+
+        // 테스트 Store 생성
+        Store testStore = new Store();
+        testStore.setName("테스트 스토어");
+        testStore.setAddress("대구광역시 북구 대학로 80");
+        testStore.setPhone("010-0000-0000");
+        testStore.setCert("12345");
+        testStore.setLocation(testLocation);
+        storeRepository.save(testStore);
+
+        // 테스트 StoreMember 생성
+        String testHashedPassword = hashPassword("testPassword");
+        StoreMember testStoreMember = new StoreMember(
+                "테스트 소유자",
+                "010-1111-2222",
+                "test@example.com",
+                "testUser",
+                testHashedPassword,
+                testStore
+        );
+        storeMemberRepository.save(testStoreMember);
     }
 
 }

@@ -8,8 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import knu.hackathon24.cat.thumbler.location.Location;
 import knu.hackathon24.cat.thumbler.point.Point;
+import knu.hackathon24.cat.thumbler.qrCode.QrCode;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="USER_MEMBER")
@@ -60,4 +63,9 @@ public class UserMember {
   @OneToOne(optional = false)
   @JoinColumn(name = "point", nullable = false)
   private Point point;
+
+  @Setter
+  @OneToOne(optional = false)
+  @JoinColumn(name = "qrcode", nullable = true)
+  private QrCode qrCode;
 }

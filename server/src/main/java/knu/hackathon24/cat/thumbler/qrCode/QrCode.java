@@ -1,12 +1,10 @@
 package knu.hackathon24.cat.thumbler.qrCode;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import knu.hackathon24.cat.thumbler.location.Location;
+import knu.hackathon24.cat.thumbler.userMember.UserMember;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "QRCODE")
@@ -24,9 +22,13 @@ public class QrCode {
   @Column(name = "id")
   private Long id;
 
+  @Setter
   @Column(name = "qr_image_url", nullable = false, length = 200)
   private String qrImageUrl;
 
+  @Setter
+  @Column(name = "user_id", nullable = false, length = 20)
+  private String userId; // userId만 저장
+
   /********** interface **********/
-  // 프론트에서 인증해서 주면 어떤 유저인지 찾아봐야되려나?
 }

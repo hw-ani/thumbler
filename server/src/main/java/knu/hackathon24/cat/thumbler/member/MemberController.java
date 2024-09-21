@@ -17,17 +17,17 @@ public class MemberController {
     private final UserMemberService userMemberService;
     private final StoreMemberService storeMemberService;
 
-    @PostMapping("/owner/login")
-    public ResponseEntity<StoreMember> loginStoreMember(@RequestBody LoginRequestDTO loginRequest, HttpServletResponse response) {
-        StoreMember storeMember = storeMemberService.loginStoreMember(loginRequest.getUserId(), loginRequest.getPassword(), response);
-
-        return ResponseEntity.ok(storeMember);
-    }
-
-    @PostMapping("/users/login")
-    public ResponseEntity<UserMember> loginUserMember(@RequestBody LoginRequestDTO loginRequest, HttpServletResponse response) {
-        UserMember userMember = userMemberService.loginUser(loginRequest.getUserId(), loginRequest.getPassword(), response);
-
-        return ResponseEntity.ok(userMember);
-    }
+//    @PostMapping("/owner/login")
+//    public ResponseEntity<StoreMember> loginStoreMember(@RequestBody LoginRequestDTO loginRequest, HttpServletResponse response) {
+//        StoreMember storeMember = storeMemberService.loginStoreMember(loginRequest.getUserId(), loginRequest.getPassword(), response);
+//
+//        return ResponseEntity.ok(storeMember);
+//    }
+//
+//    @PostMapping("/users/login")
+//    public ResponseEntity<UserMember> loginUserMember(@RequestBody LoginRequestDTO loginRequest, HttpServletResponse response) {
+//        UserMember userMember = userMemberService.loginUser(loginRequest.getUserId(), loginRequest.getPassword(), response);
+//
+//        return ResponseEntity.ok(userMember);
+//    }
 }
