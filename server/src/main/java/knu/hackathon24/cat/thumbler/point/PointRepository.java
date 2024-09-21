@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PointRepository extends JpaRepository<Point, Long> {
-    Point findByConsumerId(String consumerId);
+
 }

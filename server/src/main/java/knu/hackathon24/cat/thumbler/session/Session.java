@@ -6,7 +6,9 @@ import java.util.UUID;
 import knu.hackathon24.cat.thumbler.point.Point;
 import knu.hackathon24.cat.thumbler.storeMember.StoreMember;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Session {
   private static Session singletonSession = null;
 

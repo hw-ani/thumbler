@@ -2,17 +2,17 @@ package knu.hackathon24.cat.thumbler.userMember;
 
 import knu.hackathon24.cat.thumbler.point.Point;
 import knu.hackathon24.cat.thumbler.point.PointRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserMemberService {
 
-    @Autowired
-    private UserMemberRepository userMemberRepository;
+    final private UserMemberRepository userMemberRepository;
 
-    @Autowired
-    private PointRepository pointRepository;
+    final private PointRepository pointRepository;
 
     public UserMember registerUser(UserMemberRequest userMemberRequest) {
         // 기본 포인트 생성 (초기값 0)
