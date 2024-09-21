@@ -45,7 +45,7 @@ public class StoreMember {
   @Column(name = "userId", nullable = false, length = 20)
   private String userId;
 
-  @Column(name = "password", nullable = false, length = 20)
+  @Column(name = "password", nullable = false, length = 200)
   private String password;
 
   @OneToOne(optional = false)
