@@ -88,25 +88,66 @@
             flex-grow: 1;
             overflow-y: auto; /* 스크롤 가능하게 설정 */
             padding: 20px;
+            text-align: center;
         }
 
-        .product {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #ccc;
-            padding: 10px 0;
-        }
-
-        .product img {
-            width: 60px;
-            height: 60px;
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            height: 250px; /* 고정된 높이 */
             background-color: #ccc;
+            margin: 0 auto;
+            margin-bottom: 20px;
         }
 
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지 비율을 유지하면서 크기에 맞춤 */
+        }
+
+        .product-details {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .product-details h2 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+        }
+
+        /* 제품 상세 정보 영역 */
         .product-info {
-            flex-grow: 1;
-            margin-left: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: left;
+            background-color: #f9f9f9;
+            margin-bottom: 80px; /* 구매 버튼을 위한 공간 확보 */
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* 구매 버튼 고정 */
+        .buy-button {
+            position: fixed;
+            bottom: 70px; /* 하단바 위쪽에 고정 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #255852;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .buy-button:hover {
+            background-color: #457d68;
         }
 
         /* 하단 네비게이션 스타일 */
@@ -155,6 +196,7 @@
         <img src="/mnt/data/image.png" alt="상단바 이미지">
     </div>
 
+    <!-- 사이드 메뉴 -->
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSideMenu()">&times;</a>
         <a href="#">메뉴 1</a>
@@ -162,28 +204,28 @@
         <a href="#">메뉴 3</a>
     </div>
 
+    <!-- 메인 콘텐츠 -->
     <main>
-        <div class="product">
-            <img src="#" alt="상품 이미지">
-            <div class="product-info">
-                <p>상품 이름</p>
-                <p>XXXXX 포인트</p>
-            </div>
+        <div class="product-image">
+            <img src="/mnt/data/image.png" alt="상품 이미지">
         </div>
-        <div class="product">
-            <img src="#" alt="상품 이미지">
-            <div class="product-info">
-                <p>상품 이름</p>
-                <p>XXXXX 포인트</p>
-            </div>
+
+        <div class="product-details">
+            <h2>상품명</h2>
+            <h3>가격</h3>
+            <p>나의 잔여포인트 : XXXXXX</p>
+            <p>텀블러를 X번 더 이용하면 이 제품을 구매할 수 있어요!</p>
         </div>
-        <div class="product">
-            <img src="#" alt="상품 이미지">
-            <div class="product-info">
-                <p>상품 이름</p>
-                <p>XXXXX 포인트</p>
-            </div>
+
+        <!-- 제품 상세 정보 -->
+        <div class="product-info">
+            <h3>제품 상세 정보</h3>
+            <p>서버에서 불러온 제품의 세부 정보를 여기에 표시할 수 있습니다.</p>
+            <p>예: 재질, 크기, 무게, 제조사 등</p>
         </div>
+
+        <!-- 구매 버튼 -->
+        <button class="buy-button" onclick="purchaseProduct()">구매</button>
     </main>
 
     <!-- 하단 네비게이션 -->
@@ -196,15 +238,15 @@
             <img src="icons/search.svg" alt="제휴상점">
             제휴상점
         </a>
-        <a href="customer_button_qrscan.html">
+        <a href="qr_scan.html">
             <img src="icons/notification.svg" alt="QR스캔">
             QR스캔
         </a>
-        <a href="customer_button_sale.html">
+        <a href="sale.html">
             <img src="icons/profile.svg" alt="마감 세일">
             마감 세일
         </a>
-        <a href="customer_button_ranking.html">
+        <a href="user_ranking.html">
             <img src="icons/settings.svg" alt="유저 랭킹">
             유저 랭킹
         </a>
@@ -213,7 +255,7 @@
     <script>
         function goToMainPage() {
             // 메인 페이지로 이동하는 코드
-            window.location.href = "customer_home.html";
+            window.location.href = "#";
         }
 
         function openSideMenu() {
@@ -222,6 +264,11 @@
 
         function closeSideMenu() {
             document.getElementById("side-menu").style.width = "0";
+        }
+
+        function purchaseProduct() {
+            // 구매 완료 메시지 표시
+            alert("구매가 완료되었습니다.");
         }
     </script>
 
