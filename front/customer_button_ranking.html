@@ -128,8 +128,13 @@
         .bottom-nav a {
             text-decoration: none;
             color: white;
-            text-align: center;
-            font-size: 12px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
 
         .bottom-nav img {
@@ -244,29 +249,29 @@
         </ul>
     </div>
 
-    <!-- Bottom Navigation -->
+    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
         <a href="customer_button_store.html">
-            <img src="icons/search.svg" alt="포인트 상점">
-            포인트 상점
-        </a>
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
         <a href="customer_affiliate_store.html">
-            <img src="icons/search.svg" alt="제휴상점">
+            <img src="store.png" alt="제휴상점">
             제휴상점
         </a>
         <a href="customer_button_qrscan.html">
-            <img src="icons/notification.svg" alt="QR스캔">
+            <img src="qr.png" alt="QR스캔">
             QR스캔
         </a>
         <a href="customer_button_sale.html">
-            <img src="icons/profile.svg" alt="마감 세일">
+            <img src="sale.png" alt="마감 세일">
             마감 세일
         </a>
         <a href="customer_button_ranking.html">
-            <img src="icons/settings.svg" alt="유저 랭킹">
+            <img src="ranking.png" alt="유저 랭킹">
             유저 랭킹
         </a>
     </nav>
+
 
     <!-- 사이드 메뉴 -->
     <div id="sideMenu" class="side-menu">
