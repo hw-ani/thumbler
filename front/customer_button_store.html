@@ -50,6 +50,7 @@
             height: 40px;
         }
 
+        /* 사이드 메뉴 */
         .side-menu {
             height: 100%;
             width: 0;
@@ -61,15 +62,20 @@
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .side-menu.open {
+            width: 250px;
         }
 
         .side-menu a {
             padding: 10px 20px;
             text-decoration: none;
-            font-size: 25px;
+            font-size: 20px;
             color: white;
             display: block;
-            transition: 0.3s;
+            border-bottom: 1px solid white; /* 하얀색 구분선 */
         }
 
         .side-menu a:hover {
@@ -84,6 +90,28 @@
             cursor: pointer;
         }
 
+        /* 프로필 섹션 */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 0; /* 하단 마진 제거 */
+            border-bottom: 1px solid white; /* 프로필과 My Page 구분 */
+            padding-bottom: 10px; /* 다른 메뉴들과 동일한 간격 */
+        }
+
+        .profile-section img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .profile-section h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: white; /* 텍스트 색상을 흰색으로 변경 */
+        }
+
         main {
             flex-grow: 1;
             overflow-y: auto; /* 스크롤 가능하게 설정 */
@@ -96,6 +124,7 @@
             justify-content: space-between;
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
+            cursor: pointer; /* 상품 선택 시 클릭 가능하게 변경 */
         }
 
         .product img {
@@ -155,29 +184,39 @@
         <img src="/mnt/data/image.png" alt="상단바 이미지">
     </div>
 
+    <!-- 사이드 메뉴 -->
     <div id="side-menu" class="side-menu">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeSideMenu()">&times;</a>
-        <a href="#">메뉴 1</a>
-        <a href="#">메뉴 2</a>
-        <a href="#">메뉴 3</a>
+        <span class="close-btn" onclick="closeSideMenu()">&times;</span>
+
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <h2>내 프로필</h2>
+        </div>
+
+        <a href="mypage.html">My page 이동하기</a>
+        <a href="setting.html">설정</a>
+        <a href="#" onclick="showContact()">문의하기</a>
+        <a href="index.html">로그아웃</a>
     </div>
 
     <main>
-        <div class="product">
+        <!-- 상품을 클릭하면 customer_store_detail.html로 이동 -->
+        <div class="product" onclick="goToDetailPage()">
             <img src="#" alt="상품 이미지">
             <div class="product-info">
                 <p>상품 이름</p>
                 <p>XXXXX 포인트</p>
             </div>
         </div>
-        <div class="product">
+        <div class="product" onclick="goToDetailPage()">
             <img src="#" alt="상품 이미지">
             <div class="product-info">
                 <p>상품 이름</p>
                 <p>XXXXX 포인트</p>
             </div>
         </div>
-        <div class="product">
+        <div class="product" onclick="goToDetailPage()">
             <img src="#" alt="상품 이미지">
             <div class="product-info">
                 <p>상품 이름</p>
@@ -222,6 +261,15 @@
 
         function closeSideMenu() {
             document.getElementById("side-menu").style.width = "0";
+        }
+
+        function goToDetailPage() {
+            // 상품 상세 페이지로 이동하는 코드
+            window.location.href = "customer_store_detail.html";
+        }
+
+        function showContact() {
+            alert("thumblerfor@gmail.com 이메일로 연락 주세요");
         }
     </script>
 

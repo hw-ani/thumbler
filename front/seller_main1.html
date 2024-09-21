@@ -36,11 +36,6 @@
             font-size: 36px;
             font-weight: bold;
         }
-        .menu-icon {
-            color: #255852;
-            font-size: 28px;
-            cursor: pointer;
-        }
         .welcome-box {
             background-color: #e6fffa;
             color: #255852;
@@ -154,9 +149,6 @@
             .grid-button {
                 font-size: 14px;
             }
-            .menu-icon {
-                font-size: 24px;
-            }
         }
     </style>
 </head>
@@ -164,7 +156,6 @@
     <div class="container">
         <div class="header">
             <div class="logo">thumb-ler</div>
-            <div class="menu-icon" id="menu-icon">☰</div>
         </div>
         <div class="welcome-box">
             🏪 ooo 사업자님! 안녕하세요! 🍃
@@ -193,8 +184,6 @@
 
     <script>
         // 이벤트 리스너 추가
-        document.getElementById("menu-icon").addEventListener("click", toggleSidebar);
-        document.getElementById("menu-icon").addEventListener("touchstart", toggleSidebar);
         document.getElementById("sidebar-close").addEventListener("click", toggleSidebar);
         document.getElementById("sidebar-close").addEventListener("touchstart", toggleSidebar);
 
