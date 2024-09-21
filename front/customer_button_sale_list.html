@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--완-->
 <html lang="ko">
 
 <head>
@@ -43,11 +43,16 @@
         /* 초록색 바 */
         .sale-bar {
             background-color: #004d40;
-            color: white;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 10px;
-            font-size: 18px;
             flex-shrink: 0;
+        }
+
+        .sale-bar img {
+            max-height: 30px; /* 상단바에 맞게 이미지 높이 조정 */
+            object-fit: contain;
         }
 
         /* 상품 리스트 */
@@ -117,7 +122,6 @@
             align-items: center;
             justify-content: center;
             height: 60px;
-            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
 
         .bottom-nav img {
@@ -174,6 +178,10 @@
             margin-bottom: 0;
             border-bottom: 1px solid white;
             padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-section img {
@@ -181,7 +189,8 @@
             height: 80px;
             border-radius: 50%;
             background-color: white;
-            padding: 10px;
+            display: block;
+            object-fit: cover;
         }
 
         .profile-section h2 {
@@ -198,9 +207,9 @@
         <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
     </header>
 
-    <!-- 초록색 바 (마감세일) -->
+    <!-- 초록색 바 (마감세일 아이콘) -->
     <div class="sale-bar">
-        마감세일
+        <img src="sale.png" alt="SALE 아이콘">
     </div>
 
     <!-- 상품 리스트 -->
@@ -238,7 +247,7 @@
 
         <!-- 프로필 섹션 -->
         <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <img src="user.png" alt="프로필 이미지">
             <h2>내 프로필</h2>
         </div>
 
