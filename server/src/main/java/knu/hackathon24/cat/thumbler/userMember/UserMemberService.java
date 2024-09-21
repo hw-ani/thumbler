@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UserMemberService {
 
     final private UserMemberRepository userMemberRepository;
-
     final private PointRepository pointRepository;
+    final private Session session;
 
     public UserMember registerUser(UserMemberRequest userMemberRequest) {
         // 기본 포인트 생성 (초기값 0)
@@ -93,7 +93,7 @@ public class UserMemberService {
     }
 
     public String issueUserSessionId(UserMember userMember) {
-        return Session.getInstance().issueUserSessionId(userMember);
+        return session.issueUserSessionId(userMember);
     }
 }
 

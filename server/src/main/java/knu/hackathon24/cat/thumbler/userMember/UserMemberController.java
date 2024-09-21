@@ -1,11 +1,8 @@
 package knu.hackathon24.cat.thumbler.userMember;
 
-import knu.hackathon24.cat.thumbler.member.LoginRequestDTO;
-import knu.hackathon24.cat.thumbler.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/member/users")

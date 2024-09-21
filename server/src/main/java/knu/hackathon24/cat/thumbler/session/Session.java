@@ -8,13 +8,11 @@ import knu.hackathon24.cat.thumbler.storeMember.StoreMemberRepository;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
 import knu.hackathon24.cat.thumbler.userMember.UserMemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class Session {
   final private UserMemberRepository userMemberRepository;
   final private StoreMemberRepository storeMemberRepository;

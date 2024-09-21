@@ -23,6 +23,7 @@ public class StoreMemberService {
     private final StoreRepository storeRepository;
     private final LocationRepository locationRepository;
     private final LocationService locationService; // 추가
+    private final Session session;
 
     @Transactional
     public StoreMemberRegisterResponseDto registerStoreMember(StoreMemberRegisterRequestDto requestDto) {
@@ -96,7 +97,7 @@ public class StoreMemberService {
     }
 
     public String issueStoreSessionId(StoreMember storeMember) {
-        return Session.getInstance().issueStoreSessionId(storeMember);
+        return session.issueStoreSessionId(storeMember);
     }
 
 }

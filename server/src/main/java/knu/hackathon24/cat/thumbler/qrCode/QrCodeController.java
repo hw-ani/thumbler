@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import knu.hackathon24.cat.thumbler.point.Point;
 import knu.hackathon24.cat.thumbler.session.Session;
 import knu.hackathon24.cat.thumbler.userMember.UserMember;
 

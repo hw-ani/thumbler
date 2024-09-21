@@ -8,8 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "QRCODE")
 @Getter
