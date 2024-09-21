@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import knu.hackathon24.cat.thumbler.imageUpload.ImageUpload;
 import knu.hackathon24.cat.thumbler.session.Session;
 import knu.hackathon24.cat.thumbler.storeMember.StoreMember;
@@ -34,7 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class FoodController {
   final private FoodRepository foodRepository;
   final private ImageUpload imageUpload;
-  final private ObjectMapper objectMapper;
+  final private Session session;
 
   private String[] areas = {"북구", "서구", "동구", "수성", "중구", "달서구", "남구", "달성군", "군위군"};
 
@@ -83,7 +81,6 @@ public class FoodController {
       String imageUrl = imageUpload.uploadImage(imageString);
 
       // db에 저장하기
-      Session session = Session.getInstance();
       StoreMember storeMember = session.getStoreMemberBySessionId(sessionId);
       Food newFood = new Food(name, originalPrice, discountedPrice, count, deadline, imageUrl, storeMember.getStore());
       foodRepository.save(newFood);
