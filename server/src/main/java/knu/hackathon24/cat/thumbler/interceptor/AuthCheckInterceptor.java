@@ -17,7 +17,7 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     // for test
-    session.initForTest();
+//    session.initForTest();
 
     Cookie[] list = request.getCookies();
 		for (Cookie cookie:list)
