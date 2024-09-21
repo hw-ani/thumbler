@@ -32,5 +32,10 @@ public class Location {
   private String longitude;
 
   /********** interface **********/
-  // 주변 가게 리스트 반환. 여기 말고 store에서 해야되나?
+  public boolean isNearBy(Location comparedLocation) {
+    if ((Double.parseDouble(this.latitude) - Double.parseDouble(comparedLocation.getLatitude()) < 0.05)
+        && (Double.parseDouble(this.longitude) - Double.parseDouble(comparedLocation.getLongitude()) < 0.05))
+      return true;
+    return false;
+  }
 }
