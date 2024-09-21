@@ -1,5 +1,7 @@
 package knu.hackathon24.cat.thumbler.storeMember;
 
+import knu.hackathon24.cat.thumbler.member.LoginRequestDTO;
+import knu.hackathon24.cat.thumbler.session.Session;
 import knu.hackathon24.cat.thumbler.storeMember.StoreMemberRegisterRequestDto;
 import knu.hackathon24.cat.thumbler.storeMember.StoreMemberRegisterResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -20,4 +22,5 @@ public class StoreMemberController {
         StoreMemberRegisterResponseDto responseDto = storeMemberService.registerStoreMember(requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
+
 }
