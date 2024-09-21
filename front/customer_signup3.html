@@ -6,12 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>소비자 회원가입 - 계좌 정보</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios 라이브러리 추가 -->
+
     <script>
-        function showSuccessMessage() {
-            alert("회원가입에 성공했습니다!");
+        function submitAccountInfo(event) {
+            event.preventDefault(); // 기본 폼 제출 동작을 막음
 
-            window.location.href = "customer_home.html"; // 로그인 후 첫 페이지로 이동
+            // 입력한 값을 가져옴
+            const bank = document.getElementById('bank').value;
+            const account = document.getElementById('account').value;
 
+            // 서버로 전송할 데이터 구성
+            const accountData = {
+                bank: bank,
+                account: account
+            };
+
+            // Axios로 POST 요청 보내기
+            axios.post('/member/users/register', accountData)
+                .then(response => {
+                    if (response.data.success) {
+                        alert('회원가입에 성공했습니다!');
+                        window.location.href = "customer_home.html"; // 성공 시 메인 페이지로 이동
+                    } else {
+                        alert('회원가입 실패: ' + response.data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('서버 오류가 발생했습니다.');
+                });
         }
     </script>
 </head>
@@ -21,8 +45,10 @@
 
         <h1>thumb-ler</h1>
 
-        <p>텀블러를 사용함으로써 얻은 포인트를 출금할 수 있어요!</p>
-        <form onsubmit="event.preventDefault(); showSuccessMessage();">
+        <p style="text-align:center;">텀블러를 사용함으로써 얻은 포인트를 <br> 출금할 수 있어요!</p>
+
+        <!-- onsubmit에서 새로 작성한 함수 호출 -->
+        <form onsubmit="submitAccountInfo(event);">
             <label for="bank">은행</label>
             <input type="text" id="bank" name="bank" required>
 

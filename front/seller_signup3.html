@@ -7,9 +7,43 @@
     <title>소비자 회원가입 - 계좌 정보</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        function showSuccessMessage() {
-            alert("회원가입에 성공했습니다!");
-            window.location.href = "seller_main1.html"; // 로그인 후 첫 페이지로 이동
+        function submitForm(event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            // 입력 데이터 수집
+            const storeName = document.getElementById("nickname").value;
+            const address = document.getElementById("username").value;
+            const storePhone = document.getElementById("password").value;
+            const cert = document.getElementById("password-confirm").value;
+
+            // 요청 데이터 객체 생성
+            const requestBody = {
+                store: {
+                    name: storeName,
+                    address: address,
+                    phone: storePhone,
+                    cert: cert
+                }
+            };
+
+            // API 요청 보내기
+            fetch('/member/owner/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert("회원가입에 성공했습니다!");
+                    window.location.href = "seller_main1.html"; // 성공 후 페이지 이동
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('등록 중 오류가 발생했습니다.');
+                });
         }
     </script>
 </head>
@@ -18,7 +52,7 @@
     <div class="form-container">
         <h1>thumb-ler</h1>
 
-        <form onsubmit="event.preventDefault(); showSuccessMessage();">
+        <form id="registerForm" onsubmit="submitForm(event)">
             <label for="nickname">상호명</label>
             <input type="text" id="nickname" name="nickname" required>
 
