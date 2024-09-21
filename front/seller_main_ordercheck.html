@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thumb-ler 주문 조회</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 100vh; /* 전체 화면 높이 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            border-bottom: 2px solid #ddd; /* 구분감을 주기 위해 하단에 경계선 추가 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과로 더 구분되게 함 */
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #255852;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #255852; /* 주문 조회 영역의 배경색을 다르게 설정 */
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
+
+        .order-list {
+            flex: 1; /* 주문 리스트가 남은 공간을 채우도록 설정 */
+            overflow-y: auto; /* 스크롤 가능하게 설정 */
+            padding-right: 10px;
+        }
+
+        .order {
+            border-bottom: 1px solid #ddd;
+            padding: 10px; /* 각 주문 항목의 간격을 조금 줄임 */
+            font-size: 14px; /* 글자 크기를 조금 줄임 */
+        }
+
+        .order p {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .order strong {
+            display: block;
+            font-weight: bold;
+        }
+
+        /* 반응형 디자인 */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .order p {
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="seller_main1.html" class="logo">thumb-ler</a>
+        </header>
+        <h1>주문 조회</h1> <!-- 주문 조회 타이틀 영역 -->
+        <div class="order-list">
+            <!-- 서버에서 주문 데이터를 받아오는 영역 -->
+            <div class="order">
+                <p><strong>사용자 닉네임님</strong></p>
+                <p>○○상품 주문번호 : 888888888888</p>
+                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
+            </div>
+            <div class="order">
+                <p><strong>사용자 닉네임님</strong></p>
+                <p>○○상품 주문번호 : 888888888888</p>
+                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
+            </div>
+            <div class="order">
+                <p><strong>사용자 닉네임님</strong></p>
+                <p>○○상품 주문번호 : 888888888888</p>
+                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
+            </div>
+            <div class="order">
+                <p><strong>사용자 닉네임님</strong></p>
+                <p>○○상품 주문번호 : 888888888888</p>
+                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
+            </div>
+            <div class="order">
+                <p><strong>사용자 닉네임님</strong></p>
+                <p>○○상품 주문번호 : 888888888888</p>
+                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
+            </div>
+            <div class="order">
+                <p><strong>사용자 닉네임님</strong></p>
+                <p>○○상품 주문번호 : 888888888888</p>
+                <p>ㅇㅇ시 ㅇㅇ분 도착 예정</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
