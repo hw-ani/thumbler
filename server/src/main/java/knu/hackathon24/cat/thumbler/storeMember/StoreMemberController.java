@@ -1,9 +1,5 @@
 package knu.hackathon24.cat.thumbler.storeMember;
 
-import knu.hackathon24.cat.thumbler.member.LoginRequestDTO;
-import knu.hackathon24.cat.thumbler.session.Session;
-import knu.hackathon24.cat.thumbler.storeMember.StoreMemberRegisterRequestDto;
-import knu.hackathon24.cat.thumbler.storeMember.StoreMemberRegisterResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
