@@ -11,7 +11,7 @@
 <body>
     <div class="form-container">
         <h1>thumb-ler</h1>
-        <form action="seller_signup2.html" method="POST">
+        <form id="registerForm">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required>
 
@@ -21,6 +21,38 @@
             <button type="submit" class="next-button">next &gt;</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // 폼의 기본 제출 기능 방지
+
+            const ownerName = document.getElementById('name').value;
+            const ownerPhone = document.getElementById('contact').value;
+
+            const requestBody = {
+                ownerName: ownerName,
+                ownerPhone: ownerPhone
+            };
+
+            fetch('/member/owner/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    // 다음 페이지로 이동
+                    window.location.href = 'seller_signup2.html';
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('등록 중 오류가 발생했습니다.');
+                });
+        });
+    </script>
 </body>
 
 </html>
