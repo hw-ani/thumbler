@@ -56,8 +56,9 @@
             padding: 20px;
             background-color: white;
             margin: 10px;
-            border: 1px solid #004d40;
+            border: 3px solid #004d40;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .profile-picture {
@@ -87,10 +88,12 @@
         /* Main Content (Ranking Section) */
         .content-box {
             flex-grow: 1;
-            border: 1px solid #004d40;
+            border: 3px solid #004d40;
             margin: 10px;
             background-color: white;
             overflow-y: scroll;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .ranking-list {
@@ -120,8 +123,12 @@
         .bottom-nav a {
             text-decoration: none;
             color: white;
-            text-align: center;
-            font-size: 12px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
         }
 
         .bottom-nav img {
@@ -172,15 +179,15 @@
             cursor: pointer;
         }
 
-        /* 프로필 섹션 */
-        .profile-section {
+        /* 프로필 섹션 (사이드 메뉴) */
+        .side-menu .profile-section {
             text-align: center;
             margin-bottom: 0;
             border-bottom: 1px solid white;
             padding-bottom: 10px;
         }
 
-        .profile-section img {
+        .side-menu .profile-section img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -188,7 +195,7 @@
             padding: 10px;
         }
 
-        .profile-section h2 {
+        .side-menu .profile-section h2 {
             font-size: 18px;
             margin-top: 10px;
         }
@@ -215,9 +222,9 @@
         <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
     </header>
 
-    <!-- 초록색 바 (마감세일) -->
+    <!-- 초록색 바 (랭킹) -->
     <div class="sale-bar">
-        마감세일
+        랭킹
     </div>
 
     <!-- Profile Section -->
@@ -236,29 +243,29 @@
         </ul>
     </div>
 
-    <!-- Bottom Navigation -->
+    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
         <a href="customer_button_store.html">
-            <img src="icons/search.svg" alt="포인트 상점">
-            포인트 상점
-        </a>
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
         <a href="customer_affiliate_store.html">
-            <img src="icons/search.svg" alt="제휴상점">
+            <img src="store.png" alt="제휴상점">
             제휴상점
         </a>
         <a href="customer_button_qrscan.html">
-            <img src="icons/notification.svg" alt="QR스캔">
+            <img src="qr.png" alt="QR스캔">
             QR스캔
         </a>
         <a href="customer_button_sale.html">
-            <img src="icons/profile.svg" alt="마감 세일">
+            <img src="sale.png" alt="마감 세일">
             마감 세일
         </a>
         <a href="customer_button_ranking.html">
-            <img src="icons/settings.svg" alt="유저 랭킹">
+            <img src="ranking.png" alt="유저 랭킹">
             유저 랭킹
         </a>
     </nav>
+
 
     <!-- 사이드 메뉴 -->
     <div id="sideMenu" class="side-menu">
@@ -290,41 +297,33 @@
             alert("thumblerfor@gmail.com 이메일로 연락 주세요");
         }
 
-        // Example backend data fetching simulation
-        document.addEventListener('DOMContentLoaded', function () {
-            // Simulate data fetching from the backend for profile
-            let userProfile = {
-                nickname: "홍길동",
-                ranking: "3등",
-                profilePicture: "profile.jpg" // URL to the profile picture
-            };
+        // Fetch ranking data from the API
+        async function fetchRanking() {
+            try {
+                const response = await fetch('http://43.200.62.183:8080/member/ranking10', {
+                    method: 'GET'
+                });
 
-            // Populate the HTML elements with backend data
-            document.getElementById('nickname').textContent = userProfile.nickname;
-            document.getElementById('ranking').textContent = `현재 ${userProfile.nickname}님은 ${userProfile.ranking}이에요!`;
-            document.getElementById('profilePic').style.backgroundImage = `url(${userProfile.profilePicture})`;
+                if (!response.ok) {
+                    throw new Error('랭킹 데이터를 불러오지 못했습니다.');
+                }
 
-            // Simulate ranking data
-            let rankings = [
-                "1위: 홍길동",
-                "2위: 이순신",
-                "3위: 세종대왕",
-                "4위: 강감찬",
-                "5위: 유관순",
-                "6위: 장보고",
-                "7위: 김구",
-                "8위: 윤봉길",
-                "9위: 신사임당",
-                "10위: 안중근"
-            ];
+                const rankingData = await response.json();
+                const rankingList = document.getElementById('rankingList');
+                rankingList.innerHTML = ''; // Clear the list before appending new data
 
-            let rankingList = document.getElementById('rankingList');
-            rankings.forEach(function (rank) {
-                let li = document.createElement('li');
-                li.textContent = rank;
-                rankingList.appendChild(li);
-            });
-        });
+                for (const [key, value] of Object.entries(rankingData.ranking)) {
+                    let li = document.createElement('li');
+                    li.textContent = `${key}: ${value}`;
+                    rankingList.appendChild(li);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // Call fetchRanking function when the page loads
+        document.addEventListener('DOMContentLoaded', fetchRanking);
     </script>
 
 </body>

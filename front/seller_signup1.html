@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소비자 회원가입</title>
+    <title>사업자 회원가입</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="form-container">
         <h1>thumb-ler</h1>
-        <form action="seller_signup2.html" method="POST">
+        <form id="registerForm" action="seller_signup2.html" method="GET">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required>
 
@@ -21,6 +21,18 @@
             <button type="submit" class="next-button">next &gt;</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            // event.preventDefault(); // 폼의 기본 제출 기능 방지
+
+            const ownerName = document.getElementById('name').value;
+            const ownerPhone = document.getElementById('contact').value;
+
+            localStorage.setItem('ownerName', ownerName);
+            localStorage.setItem('ownerPhone', ownerPhone);
+        });
+    </script>
 </body>
 
 </html>

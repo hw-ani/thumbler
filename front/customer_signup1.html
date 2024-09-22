@@ -14,7 +14,7 @@
         <h1>thumb-ler</h1>
 
 
-        <form action="customer_signup2.html" method="POST">
+        <form id="signupForm" action="customer_signup2.html" method="GET">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required>
 
@@ -25,5 +25,15 @@
         </form>
     </div>
 </body>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function (event) {
+        let name = document.querySelector("#name").value;
+        let contact = document.querySelector('#contact').value;
+
+        localStorage.setItem('name', name);
+        localStorage.setItem('contact', contact);
+    });
+</script>
 
 </html>

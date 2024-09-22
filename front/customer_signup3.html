@@ -6,23 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>소비자 회원가입 - 계좌 정보</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        function showSuccessMessage() {
-            alert("회원가입에 성공했습니다!");
-
-            window.location.href = "customer_home.html"; // 로그인 후 첫 페이지로 이동
-
-        }
-    </script>
 </head>
 
 <body>
     <div class="form-container">
-
         <h1>thumb-ler</h1>
+        <p style="text-align:center;">텀블러를 사용함으로써 얻은 포인트를 <br> 출금할 수 있어요!</p>
 
-        <p>텀블러를 사용함으로써 얻은 포인트를 출금할 수 있어요!</p>
-        <form onsubmit="event.preventDefault(); showSuccessMessage();">
+        <!-- onsubmit에서 새로 작성한 함수 호출 -->
+        <form id='signupForm'>
             <label for="bank">은행</label>
             <input type="text" id="bank" name="bank" required>
 
@@ -33,5 +25,55 @@
         </form>
     </div>
 </body>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // 기본 제출 방지
+
+        var bank = document.getElementById('bank').value;
+        var account = document.getElementById('account').value;
+
+        var nickname = localStorage.getItem('nickname');
+        var userId = localStorage.getItem('userID');
+        var password = localStorage.getItem('password');
+        var name = localStorage.getItem('name');
+        var contact = localStorage.getItem('contact');
+
+        console.log({
+            name: name,
+            phone: contact,
+            nickname: nickname,
+            userId: userId,
+            password: password,
+            bank: bank,
+            account: account
+        });
+
+        fetch('http://43.200.62.183:8080/member/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                phone: contact,
+                nickname: nickname,
+                userId: userId,
+                password: password,
+                bank: bank,
+                account: account
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // 성공적으로 요청이 처리되면 index.html로 이동
+                window.location.href = 'index.html';
+            })
+            .catch(error => {
+                console.error('QR 코드를 불러오는 중 오류 발생:', error);
+            });
+    });
+</script>
 
 </html>

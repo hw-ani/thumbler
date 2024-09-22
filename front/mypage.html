@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>thumb-ler - My Page</title>
-    <link rel="stylesheet" href="mypage_styles.css">
     <style>
         /* 기본 스타일 */
         body {
@@ -53,6 +52,7 @@
             height: 40px;
         }
 
+        /* 수정된 사이드 메뉴 스타일 */
         .side-menu {
             height: 100%;
             width: 250px;
@@ -77,6 +77,7 @@
             font-size: 20px;
             color: white;
             display: block;
+            transition: 0.3s;
             border-bottom: 1px solid white;
         }
 
@@ -92,14 +93,40 @@
             cursor: pointer;
         }
 
+        /* 프로필 섹션 */
+        .side-menu .profile-section {
+            text-align: center;
+            margin-bottom: 0;
+            border-bottom: 1px solid white;
+            padding-bottom: 10px;
+        }
+
+        .side-menu .profile-section img {
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .side-menu .profile-section h2 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* 기타 스타일 */
         .profile-section {
             display: flex;
             align-items: center;
             background-color: #004d40;
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            margin: 20px;
+            margin: 10px 20px;
+            /* 여백 최소화 */
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
         }
 
         .profile-picture {
@@ -124,18 +151,34 @@
             margin-top: 5px;
         }
 
+        .edit-profile {
+            background-color: #fff;
+            color: #004d40;
+            border: 2px solid #004d40;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .edit-profile:hover {
+            background-color: #004d40;
+            color: white;
+        }
+
         .image-box {
             background-color: white;
             border: 2px solid #004d40;
             border-radius: 10px;
             padding: 10px;
-            margin: 20px;
+            margin: 10px 20px;
+            /* 여백 최소화 */
             width: 80%;
             height: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px auto;
+            margin: 5px auto;
+            /* 여백 최소화 */
         }
 
         .image-box img {
@@ -147,16 +190,16 @@
         .points-section {
             text-align: center;
             font-size: 20px;
-            margin: 10px 0 5px;
-            /* 포인트 섹션과 버튼 사이의 간격을 좁힘 */
+            margin: 0px 0;
+            /* 여백 줄임 */
             font-weight: bold;
         }
 
         .button-section {
             display: flex;
             justify-content: space-around;
-            margin: 5px 20px;
-            /* 버튼과 포인트 섹션 사이 간격 조정 */
+            margin: 0px 0px 20px 20px;
+            /* 하단 네비게이션과 간격 추가 */
             flex-wrap: wrap;
         }
 
@@ -167,15 +210,33 @@
             border: none;
             border-radius: 10px;
             font-size: 12px;
-            width: 100px;
-            height: 100px;
+            width: 10px;
+            height: 10px;
             text-align: center;
             cursor: pointer;
-            margin: 10px;
+            margin: 0px;
         }
 
         .button-section button:hover {
             background-color: #00796b;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .button-section {
+                margin: 5px;
+            }
+
+            .button-section button {
+                width: 85px;
+                height: 85px;
+            }
+
+            .profile-picture {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
         }
 
         .bottom-nav {
@@ -191,10 +252,15 @@
         }
 
         .bottom-nav a {
-            text-align: center;
-            color: white;
-            font-size: 12px;
             text-decoration: none;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            /* 아이콘과 텍스트를 세로로 중앙 정렬 */
         }
 
         .bottom-nav i,
@@ -248,13 +314,14 @@
         <a href="index.html">로그아웃</a>
     </div>
 
-    <!-- 프로필 섹션 -->
+    <!-- 메인 프로필 섹션 -->
     <div class="profile-section">
         <div class="profile-picture">👤</div>
         <div>
             <div class="profile-info">배고픈 너구리 님</div>
             <div class="ranking">005등!</div>
         </div>
+        <button class="edit-profile">프로필<br>수정</button>
     </div>
 
     <!-- 이미지 박스 -->
@@ -276,22 +343,27 @@
 
     <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
-        <a href="point_store.html">
-            <i class="fa-solid fa-coins"></i>포인트 상점
+        <a href="customer_button_store.html">
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
+        <a href="customer_affiliate_store.html">
+            <img src="store.png" alt="제휴상점">
+            제휴상점
         </a>
-        <a href="affiliate_store.html">
-            <img src="icons/search.svg" alt="Search">제휴상점
+        <a href="customer_button_qrscan.html">
+            <img src="qr.png" alt="QR스캔">
+            QR스캔
         </a>
-        <a href="qr_scan.html">
-            <img src="icons/notification.svg" alt="QR Scan">QR스캔
+        <a href="customer_button_sale.html">
+            <img src="sale.png" alt="마감 세일">
+            마감 세일
         </a>
-        <a href="sale.html">
-            <img src="icons/profile.svg" alt="Sale">마감 세일
-        </a>
-        <a href="user_ranking.html">
-            <img src="icons/settings.svg" alt="Ranking">유저 랭킹
+        <a href="customer_button_ranking.html">
+            <img src="ranking.png" alt="유저 랭킹">
+            유저 랭킹
         </a>
     </nav>
+
 
 </body>
 

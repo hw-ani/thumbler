@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--완-->
 <html lang="ko">
 
 <head>
@@ -43,11 +43,16 @@
         /* 초록색 바 */
         .sale-bar {
             background-color: #004d40;
-            color: white;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 10px;
-            font-size: 18px;
             flex-shrink: 0;
+        }
+
+        .sale-bar img {
+            max-height: 30px; /* 상단바에 맞게 이미지 높이 조정 */
+            object-fit: contain;
         }
 
         /* 상품 리스트 */
@@ -109,10 +114,14 @@
         }
 
         .bottom-nav a {
-            text-align: center;
-            color: white;
-            font-size: 12px;
             text-decoration: none;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
         }
 
         .bottom-nav img {
@@ -169,6 +178,10 @@
             margin-bottom: 0;
             border-bottom: 1px solid white;
             padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-section img {
@@ -176,7 +189,8 @@
             height: 80px;
             border-radius: 50%;
             background-color: white;
-            padding: 10px;
+            display: block;
+            object-fit: cover;
         }
 
         .profile-section h2 {
@@ -193,9 +207,9 @@
         <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
     </header>
 
-    <!-- 초록색 바 (마감세일) -->
+    <!-- 초록색 바 (마감세일 아이콘) -->
     <div class="sale-bar">
-        마감세일
+        <img src="sale.png" alt="SALE 아이콘">
     </div>
 
     <!-- 상품 리스트 -->
@@ -206,26 +220,26 @@
     <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
         <a href="customer_button_store.html">
-            <img src="icons/search.svg" alt="포인트 상점">
-            포인트 상점
-        </a>
+            <img src="point.png" alt="포인트 상점">
+            포인트 상점 </a>
         <a href="customer_affiliate_store.html">
-            <img src="icons/search.svg" alt="제휴상점">
+            <img src="store.png" alt="제휴상점">
             제휴상점
         </a>
         <a href="customer_button_qrscan.html">
-            <img src="icons/notification.svg" alt="QR스캔">
+            <img src="qr.png" alt="QR스캔">
             QR스캔
         </a>
         <a href="customer_button_sale.html">
-            <img src="icons/profile.svg" alt="마감 세일">
+            <img src="sale.png" alt="마감 세일">
             마감 세일
         </a>
         <a href="customer_button_ranking.html">
-            <img src="icons/settings.svg" alt="유저 랭킹">
+            <img src="ranking.png" alt="유저 랭킹">
             유저 랭킹
         </a>
     </nav>
+
 
     <!-- 사이드 메뉴 -->
     <div id="sideMenu" class="side-menu">
@@ -233,7 +247,7 @@
 
         <!-- 프로필 섹션 -->
         <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <img src="user.png" alt="프로필 이미지">
             <h2>내 프로필</h2>
         </div>
 
@@ -287,9 +301,9 @@
         products.forEach(product => {
             const productItem = document.createElement('div');
             productItem.classList.add('product-item');
-            
+
             // 상품 클릭 시 이동 기능 추가
-            productItem.addEventListener('click', function() {
+            productItem.addEventListener('click', function () {
                 window.location.href = "customer_button_sale_clickdetail.html";
             });
 

@@ -10,11 +10,9 @@
 
 <body>
     <div class="form-container">
-
         <h1>thumb-ler</h1>
 
-
-        <form action="customer_signup3.html" method="POST">
+        <form id="signupForm" action="customer_signup3.html" method="GET">
             <label for="nickname">닉네임</label>
             <input type="text" id="nickname" name="nickname" required>
 
@@ -30,6 +28,28 @@
             <button type="submit" class="next-button">next &gt;</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('password-confirm').value;
+
+            if (password !== confirmPassword) {
+                event.preventDefault(); // 폼 제출 막기
+                alert('비밀번호 확인을 다시 진행해주세요');
+            }
+            let nickname = document.querySelector("#nickname").value;
+            let userID = document.querySelector('#username').value;
+
+            var name = localStorage.getItem('name');
+            var contact = localStorage.getItem('contact');
+            localStorage.setItem('name', name);
+            localStorage.setItem('contact', contact);
+            localStorage.setItem('nickname', nickname);
+            localStorage.setItem('userID', userID);
+            localStorage.setItem('password', password);
+        });
+    </script>
 </body>
 
 </html>

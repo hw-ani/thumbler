@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--완-->
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            height: 100vh; /* 화면 전체 높이 설정 */
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -35,7 +36,6 @@
             cursor: pointer;
         }
 
-        /* 상단바 구분 */
         .top-bar {
             background-color: #255852;
             display: flex;
@@ -44,13 +44,11 @@
             flex-shrink: 0;
         }
 
-        /* 상단바의 이미지 */
         .top-bar img {
             width: 40px;
             height: 40px;
         }
 
-        /* 사이드 메뉴 */
         .side-menu {
             height: 100%;
             width: 0;
@@ -75,7 +73,7 @@
             font-size: 20px;
             color: white;
             display: block;
-            border-bottom: 1px solid white; /* 하얀색 구분선 */
+            border-bottom: 1px solid white;
         }
 
         .side-menu a:hover {
@@ -90,12 +88,15 @@
             cursor: pointer;
         }
 
-        /* 프로필 섹션 */
         .profile-section {
             text-align: center;
-            margin-bottom: 0; /* 하단 마진 제거 */
-            border-bottom: 1px solid white; /* 프로필과 My Page 구분 */
-            padding-bottom: 10px; /* 다른 메뉴들과 동일한 간격 */
+            margin-bottom: 0;
+            border-bottom: 1px solid white;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-section img {
@@ -103,18 +104,19 @@
             height: 80px;
             border-radius: 50%;
             background-color: white;
-            padding: 10px;
+            display: block;
+            object-fit: cover;
         }
 
         .profile-section h2 {
             font-size: 18px;
             margin-top: 10px;
-            color: white; /* 텍스트 색상을 흰색으로 변경 */
+            color: white;
         }
 
         main {
             flex-grow: 1;
-            overflow-y: auto; /* 스크롤 가능하게 설정 */
+            overflow-y: auto;
             padding: 20px;
         }
 
@@ -124,7 +126,7 @@
             justify-content: space-between;
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
-            cursor: pointer; /* 상품 선택 시 클릭 가능하게 변경 */
+            cursor: pointer;
         }
 
         .product img {
@@ -138,7 +140,6 @@
             margin-left: 20px;
         }
 
-        /* 하단 네비게이션 스타일 */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -163,6 +164,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 60px;
         }
 
         .bottom-nav img {
@@ -172,6 +175,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -179,18 +183,15 @@
         <span class="menu-icon" onclick="openSideMenu()">&#9776;</span>
     </header>
 
-    <!-- 상단바와 이미지 -->
     <div class="top-bar">
-        <img src="/mnt/data/image.png" alt="상단바 이미지">
+        <img src="point.png" alt="상단바 이미지">
     </div>
 
-    <!-- 사이드 메뉴 -->
     <div id="side-menu" class="side-menu">
         <span class="close-btn" onclick="closeSideMenu()">&times;</span>
 
-        <!-- 프로필 섹션 -->
         <div class="profile-section">
-            <img src="/mnt/data/image.png" alt="프로필 이미지">
+            <img src="user.png" alt="프로필 이미지">
             <h2>내 프로필</h2>
         </div>
 
@@ -200,58 +201,35 @@
         <a href="index.html">로그아웃</a>
     </div>
 
-    <main>
-        <!-- 상품을 클릭하면 customer_store_detail.html로 이동 -->
-        <div class="product" onclick="goToDetailPage()">
-            <img src="#" alt="상품 이미지">
-            <div class="product-info">
-                <p>상품 이름</p>
-                <p>XXXXX 포인트</p>
-            </div>
-        </div>
-        <div class="product" onclick="goToDetailPage()">
-            <img src="#" alt="상품 이미지">
-            <div class="product-info">
-                <p>상품 이름</p>
-                <p>XXXXX 포인트</p>
-            </div>
-        </div>
-        <div class="product" onclick="goToDetailPage()">
-            <img src="#" alt="상품 이미지">
-            <div class="product-info">
-                <p>상품 이름</p>
-                <p>XXXXX 포인트</p>
-            </div>
-        </div>
+    <main id="product-list">
+        <!-- 상품들이 동적으로 추가될 영역 -->
     </main>
 
-    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
         <a href="customer_button_store.html">
-            <img src="icons/search.svg" alt="포인트 상점">
+            <img src="point.png" alt="포인트 상점">
             포인트 상점
         </a>
         <a href="customer_affiliate_store.html">
-            <img src="icons/search.svg" alt="제휴상점">
+            <img src="store.png" alt="제휴상점">
             제휴상점
         </a>
         <a href="customer_button_qrscan.html">
-            <img src="icons/notification.svg" alt="QR스캔">
+            <img src="qr.png" alt="QR스캔">
             QR스캔
         </a>
         <a href="customer_button_sale.html">
-            <img src="icons/profile.svg" alt="마감 세일">
+            <img src="sale.png" alt="마감 세일">
             마감 세일
         </a>
         <a href="customer_button_ranking.html">
-            <img src="icons/settings.svg" alt="유저 랭킹">
+            <img src="ranking.png" alt="유저 랭킹">
             유저 랭킹
         </a>
     </nav>
 
     <script>
         function goToMainPage() {
-            // 메인 페이지로 이동하는 코드
             window.location.href = "customer_home.html";
         }
 
@@ -264,14 +242,54 @@
         }
 
         function goToDetailPage() {
-            // 상품 상세 페이지로 이동하는 코드
             window.location.href = "customer_store_detail.html";
         }
 
         function showContact() {
             alert("thumblerfor@gmail.com 이메일로 연락 주세요");
         }
+
+        // 상품 리스트를 API에서 불러와서 페이지에 표시하는 함수
+        async function loadProducts() {
+            try {
+                const response = await fetch('/point-store/goods', {
+                    method: 'GET',
+                    headers: {
+                        'Cookie': 'sessionId=abcd1234'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('상품 데이터를 불러오지 못했습니다.');
+                }
+
+                const products = await response.json();
+                const productList = document.getElementById('product-list');
+
+                products.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+                    productDiv.onclick = () => goToDetailPage(); // 상품 클릭 시 상세 페이지로 이동
+
+                    productDiv.innerHTML = `
+                        <img src="${product.imageUrl}" alt="상품 이미지">
+                        <div class="product-info">
+                            <p>${product.name}</p>
+                            <p>${product.point} 포인트</p>
+                        </div>
+                    `;
+
+                    productList.appendChild(productDiv);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // 페이지 로드 시 상품 리스트 불러오기
+        document.addEventListener('DOMContentLoaded', loadProducts);
     </script>
 
 </body>
+
 </html>
