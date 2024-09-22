@@ -30,15 +30,20 @@ public class Session {
   }
 
   public String issueUserSessionId(UserMember userMember) {
-    String newSessionId = generateSessionId();
-    userSessionStorage.put(newSessionId, userMember);
-    return newSessionId;
+    // String newSessionId = generateSessionId();
+    // userSessionStorage.put(newSessionId, userMember);
+    // return newSessionId;
+    userSessionStorage.put(Long.toString(userMember.getId()), userMember);
+    return Long.toString(userMember.getId());
   }
 
   public String issueStoreSessionId(StoreMember storeMember) {
-    String newSessionId = generateSessionId();
-    storeSessionStorage.put(newSessionId, storeMember);
-    return newSessionId;
+    // String newSessionId = generateSessionId();
+    // storeSessionStorage.put(newSessionId, storeMember);
+    // return newSessionId;
+    storeSessionStorage.put(Long.toString(storeMember.getId()), storeMember);
+    return Long.toString(storeMember.getId());
+    
   }
 
   public boolean verifyUserSessionId(String sessionId) {

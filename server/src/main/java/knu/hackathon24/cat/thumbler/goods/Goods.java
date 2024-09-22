@@ -33,7 +33,7 @@ public class Goods {
   @Column(name = "point", nullable = false)
   private Long point;
 
-  @Column(name = "image_url", nullable = false, length = 20)
+  @Column(name = "image_url", nullable = false, length = 150)
   private String imageUrl;
 
   @Column(name = "description", nullable = false, length = 150)

@@ -21,10 +21,11 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
     // for test
     session.initForTest();
 
-    log.info("hi~~~~~~~~~~~~~");
-
     Cookie[] list = request.getCookies();
-    if (list.length != 0)
+
+    log.info("request in interceptor : ", request.toString());
+
+    if (list != null && list.length != 0)
       for (Cookie cookie:list)
         if (cookie.getName().equals("sessionId")
             && (session.verifyUserSessionId(cookie.getValue()) || session.verifyStoreSessionId(cookie.getValue())))
