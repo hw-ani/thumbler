@@ -62,9 +62,7 @@ thumb-ler 텀블러 - 텀블러 이용 시 포인트 지급, 당일 폐기 음�
 </table>
 
 ## 시연 영상
-
-(필수) Youtube 링크
-(선택) Github Repository 페이지에서 바로 볼 수 있도록 넣어주셔도 좋습니다.
+https://youtu.be/ugD6lWBy1aQ
 
 ## 서비스 소개
 
